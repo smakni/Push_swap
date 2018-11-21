@@ -6,18 +6,32 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/21 13:24:36 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/21 19:08:08 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "ft_printf/printf/ft_printf.h"
-# include "ft_printf/libft/libft.h"
-# include "ft_printf/get_next_line/get_next_line.h"
+# include "./ft_printf/printf/ft_printf.h"
+# include "./ft_printf/libft/libft.h"
+# include "./ft_printf/get_next_line/get_next_line.h"
+
+typedef	struct	t_tab
+{
+	char	**arg;
+	int		len;
+}				s_tab;
+
+typedef struct t_pile
+{
+	int *list;
+	int	len;
+}				s_pile;
 
 int			ft_printf(const char *format, ...);
-int					ft_strequ(char const *s1, char const *s2);
+void		ft_operations(s_pile *pile_a, s_pile *pile_b, char *line);
+void		ft_swap(s_pile *pile_a, s_pile *pile_b, char *line);
+void		ft_push(s_pile *pile_a, s_pile *pile_b, char *line);
 
 #endif
