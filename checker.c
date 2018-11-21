@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:32:56 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/21 14:57:12 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/21 19:44:33 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		check_nb(char *str)
 	i = 0;
 	while (str[i])
 	{
+		if (str[i] == '-' || str[i] == '+')
+		   i++;	
 		if (ft_isdigit(str[i]) != 1)
 		{
 			ft_printf("error");
@@ -46,30 +48,28 @@ int		check_dlb(int *pile_a, int cur, int i)
 	return (0);
 }
 
-int		*check_init(int ac, char **av, int *pile_a)
+void	check_init(s_tab *tab, s_pile *pile_a)
 {
 	int 	i;
 
 	i = 0;
-	while (i < ac - 1)
+	while (i < tab->len)
 	{
-		check_nb(av[i + 1]);
-		pile_a[i] = ft_atoi(av[i + 1]);
-		check_dlb(pile_a, pile_a[i], i);
+		check_nb(tab->arg[i]);
+		pile_a->list[i] = ft_atoi(tab->arg[i]);
+		check_dlb(pile_a->list, pile_a->list[i], i);
 		i++;
 	}
-	i = 0;
-	return (pile_a);
 }
 
-int		checker(int *pile_a, int len)
+int		checker(s_pile *pile_a, int len)
 {
 	int i;
 
 	i = 0;
 	while (i < len - 1)
 	{
-		if (pile_a[i] < pile_a[i + 1])
+		if (pile_a->list[i] < pile_a->list[i + 1])
 			i++;
 		else
 			return (-1);
@@ -77,53 +77,99 @@ int		checker(int *pile_a, int len)
 	return (0);
 }
 
-void	print_pile(int *pile_a, int *pile_b, int len)
+void	print_pile(s_pile *pile_a, s_pile *pile_b)
 {
 	int i;
+	int j;
 
 	i = 0;
-	while (i < len)
+	j = 0;
+	while (i < pile_a->len || j < pile_b->len)
 	{	
-		ft_printf("%d	%d\n", pile_a[i], pile_b[i]);
+		ft_printf("%d	  ", pile_a->list[i]);
+		if (pile_b->len > 0 && j < pile_b->len)
+		{	
+			ft_printf("%d", pile_b->list[j]);
+			j++;
+		}
+		ft_printf("\n");
 		i++;
 	}
 	ft_printf("=========\na	b\n");
 }
 
-void	ft_swap(int *pile_a)
+void		init_tab(int ac, char **av, s_tab *tab)
 {
-	int tmp;
+	int len;
+	int i;
 
-	tmp = pile_a[0];
-	pile_a[0] = pile_a[1];
-	pile_a[1] = tmp;
+	len = 0;
+	i = 0;
+	if (ac == 2)
+	{
+		tab->arg = ft_strsplit(av[1], ' ');
+		while (tab->arg[len] != NULL)
+			len++;
+	}
+	else
+	{
+		len = ac - 1;
+		tab->arg = ft_memalloc(sizeof(char *) * len);
+		while (i < len)
+		{	
+			tab->arg[i] = ft_strdup(av[i + 1]);
+			i++;
+		}
+	}
+	tab->len = len;
+}
+
+void	init_pile(s_pile *pile_a, s_pile *pile_b, s_tab *tab)
+{
+	pile_a->list = ft_memalloc(sizeof(int) * tab->len);
+	pile_a->len = tab->len;
+	pile_b->list = NULL;
+	pile_b->len = 0;
+}
+
+void	free_s_tab(s_tab *tab)
+{
+	int i;
+
+	i = 0;
+	while (i < tab->len)
+		ft_strdel(&(tab->arg[i++]));
+	free(tab->arg);
+	free(tab);
 }
 
 int		main(int ac, char **av)
 {
-	int		i;
 	char	*line;
-	int 	*pile_a;
-	int		*pile_b;
-
-	line = NULL;
-	pile_a = ft_memalloc(sizeof(int) * (ac - 1));
-	pile_b = ft_memalloc(sizeof(int) * (ac - 1));
-	pile_a = check_init(ac, av, pile_a);
-	print_pile(pile_a, pile_b, ac - 1);
+	s_pile 	*pile_a;
+	s_pile	*pile_b;
+	s_tab	*tab;
+	
+	tab = ft_memalloc(sizeof(s_tab));
+	pile_a = ft_memalloc(sizeof(s_pile));
+	pile_b = ft_memalloc(sizeof(s_pile));
+	init_tab(ac, av, tab);
+	init_pile(pile_a, pile_b, tab);
+	check_init(tab, pile_a);
+	print_pile(pile_a, pile_b);
 	while (get_next_line(0, &line) > 0)
 	{
-		if (ft_strequ("sa", line) == 1)
-			ft_swap(pile_a);
-		print_pile(pile_a, pile_b, ac - 1);
+		ft_operations(pile_a, pile_b, line);
+		print_pile(pile_a, pile_b);
 		ft_strdel(&line);
 	}
-	if (checker(pile_a, ac - 1) == -1)
+	if (checker(pile_a, tab->len) == -1)
 		ft_printf("KO");
 	else
 		ft_printf("OK");
 	free(pile_a);
 	free(pile_b);
+	free_s_tab(tab);
 	return (0);
 }
 
