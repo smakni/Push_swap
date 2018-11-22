@@ -84,18 +84,14 @@ void	print_pile(s_pile *pile_a, s_pile *pile_b)
 
 	i = 0;
 	j = 0;
-	while (i < pile_a->len || j < pile_b->len)
-	{	
-		ft_printf("%d	  ", pile_a->list[i]);
-		if (pile_b->len > 0 && j < pile_b->len)
-		{	
-			ft_printf("%d", pile_b->list[j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-	ft_printf("=========\na	b\n");
+	ft_printf("len_a = %d / len_b = %d\n", pile_a->len, pile_b->len);
+	ft_printf("[a] >> ");
+	while (i < pile_a->len)
+		ft_printf("[%d]", pile_a->list[i++]);
+	ft_printf("\n[b] >> ");
+	while (j < pile_b->len)
+		ft_printf("[%d]", pile_b->list[j++]);
+	ft_printf("\noperation >> ");
 }
 
 void		init_tab(int ac, char **av, s_tab *tab)
