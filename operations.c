@@ -11,6 +11,9 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+int		*ft_push_f(int *tab, int len, int x);
+int		*ft_push_b(int *tab, int len, int dif);
+
 
 void	ft_operations(s_pile *pile_a, s_pile *pile_b, char *line)
 {
@@ -42,27 +45,37 @@ void	ft_swap(s_pile *pile_a, s_pile *pile_b, char *line)
 
 void	ft_push(s_pile *pile_a, s_pile *pile_b, char *line)
 {
-	int *tmp;
-
-	tmp = NULL;
-	if (pile_a->len != 0 && line[1] == 'a')
+	if (pile_b->len != 0 && line[1] == 'a')
 	{
+		if (pile_a->list == NULL)
+			pile_a->list = ft_memalloc(sizeof(int) * 1 + pile_a->len++);
+		else
+			pile_a->len++;
+		if (pile_a->len == 1)
+			pile_a->list[0] = pile_b->list[0];
+		else
+			pile_a->list = ft_push_f(pile_a->list, pile_a->len - 1, pile_b->list[0]);
+		pile_b->list = ft_push_b(pile_b->list, pile_b->len--, 1);
 	}
 	if (pile_a->len != 0 && line[1] == 'b')
 	{
-		tmp = ft_memalloc(sizeof(int) * pile_b->len++);
-		pile_b->list = ft_memalloc(sizeof(int) * pile_b->len);
-		ft_memcpy(tmp, pile_b->list, pile_b->len);
-		tmp[pile_b->len - 1] = pile_a->list[0];
-		ft_printf("tmp = %d\n", tmp[pile_b->len - 1]);
-		ft_memcpy(pile_b->list, tmp, pile_b->len);
-		//pile_b->list[pile_b->len - 1] = pile_a->list[0];
-		ft_printf("len_b = %d\n", pile_b->len);
-		int i = 0;
-		while (i < pile_b->len)
-		{
-			ft_printf("pile_b[%d] = %d\n", i, pile_b->list[i]);
-			i++;
-		}
+		if (pile_b->list == NULL)
+			pile_b->list = ft_memalloc(sizeof(int) * 1 + pile_b->len++);
+		else
+			pile_b->len++;
+		if (pile_b->len == 1)
+			pile_b->list[0] = pile_a->list[0];
+		else
+			pile_b->list = ft_push_f(pile_b->list, pile_b->len - 1, pile_a->list[0]);
+		pile_a->list = ft_push_b(pile_a->list, pile_a->len--, 1);
 	}
 }
+
+	/*
+	int i = 0;
+	while (i < pile_b->len)
+	{
+		ft_printf("pile_b[%d] = %d\n", i, pile_b->list[i]);
+		i++;
+	}
+	*/
