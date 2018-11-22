@@ -50,3 +50,18 @@ int		*ft_push_b(int *tab, int len, int dif)
 	free(tab);
 	return (tmp);
 }
+
+int		*ft_tabdup(int *tab, int len)
+{
+	int i;
+	int *tmp;
+
+	i = 0;
+	tmp = ft_memalloc(sizeof(int) * len);
+	while (i < len)
+	{
+		tmp[i] = tab[i];
+		i++;
+	}
+	return (tmp);
+}

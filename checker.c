@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:32:56 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/21 19:44:33 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/22 16:52:54 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ int		check_nb(char *str)
 	return (0);
 }
 
-int		check_dlb(int *pile_a, int cur, int i)
+int		check_dlb(int *a, int cur, int i)
 {
 	int j;
 
 	j = 0;
 	while (j < i)
 	{
-		if (cur == pile_a[j])
+		if (cur == a[j])
 		{	
 			ft_printf("error");
 			exit(-1);
@@ -48,50 +48,50 @@ int		check_dlb(int *pile_a, int cur, int i)
 	return (0);
 }
 
-void	check_init(s_tab *tab, s_pile *pile_a)
+void	check_init(s_tab *tab, s_pile *a)
 {
 	int 	i;
+	int		j;
 
-	i = 0;
-	while (i < tab->len)
+	i = tab->len - 1;
+	j = 0;
+	while (i >= 0)
 	{
 		check_nb(tab->arg[i]);
-		pile_a->list[i] = ft_atoi(tab->arg[i]);
-		check_dlb(pile_a->list, pile_a->list[i], i);
-		i++;
+		a->list[j] = ft_atoi(tab->arg[i]);
+		check_dlb(a->list, a->list[j], j);
+		i--;
+		j++;
 	}
 }
 
-int		checker(s_pile *pile_a, int len)
+int		checker(s_pile *a, int len)
 {
 	int i;
 
-	i = 0;
-	while (i < len - 1)
+	i = len;
+	while (i > 0)
 	{
-		if (pile_a->list[i] < pile_a->list[i + 1])
-			i++;
+		if (a->list[i] < a->list[i - 1])
+			i--;
 		else
 			return (-1);
 	}
 	return (0);
 }
 
-void	print_pile(s_pile *pile_a, s_pile *pile_b)
+void	print_pile(s_pile *a, s_pile *b, s_tab *tab)
 {
 	int i;
-	int j;
 
-	i = 0;
-	j = 0;
-	ft_printf("len_a = %d / len_b = %d\n", pile_a->len, pile_b->len);
-	ft_printf("[a] >> ");
-	while (i < pile_a->len)
-		ft_printf("[%d]", pile_a->list[i++]);
-	ft_printf("\n[b] >> ");
-	while (j < pile_b->len)
-		ft_printf("[%d]", pile_b->list[j++]);
-	ft_printf("\noperation >> ");
+	i = tab->len - 1;
+	ft_printf("[len_a = %d]-----------[len_b = %d]\n", a->len, b->len);
+	while (i >= 0)
+	{
+		ft_printf(" a[%d] = %-15db[%d] = %d\n", i, a->list[i], i, b->list[i]);
+		i--;
+	}
+	ft_printf("operation >> ");
 }
 
 void		init_tab(int ac, char **av, s_tab *tab)
@@ -120,12 +120,12 @@ void		init_tab(int ac, char **av, s_tab *tab)
 	tab->len = len;
 }
 
-void	init_pile(s_pile *pile_a, s_pile *pile_b, s_tab *tab)
+void	init_pile(s_pile *a, s_pile *b, s_tab *tab)
 {
-	pile_a->list = ft_memalloc(sizeof(int) * tab->len);
-	pile_a->len = tab->len;
-	pile_b->list = NULL;
-	pile_b->len = 0;
+	a->list = ft_memalloc(sizeof(int) * tab->len);
+	a->len = tab->len;
+	b->list = ft_memalloc(sizeof(int) * tab->len);;
+	b->len = 0;
 }
 
 void	free_s_tab(s_tab *tab)
@@ -142,29 +142,29 @@ void	free_s_tab(s_tab *tab)
 int		main(int ac, char **av)
 {
 	char	*line;
-	s_pile 	*pile_a;
-	s_pile	*pile_b;
+	s_pile 	*a;
+	s_pile	*b;
 	s_tab	*tab;
 	
 	tab = ft_memalloc(sizeof(s_tab));
-	pile_a = ft_memalloc(sizeof(s_pile));
-	pile_b = ft_memalloc(sizeof(s_pile));
+	a = ft_memalloc(sizeof(s_pile));
+	b = ft_memalloc(sizeof(s_pile));
 	init_tab(ac, av, tab);
-	init_pile(pile_a, pile_b, tab);
-	check_init(tab, pile_a);
-	print_pile(pile_a, pile_b);
+	init_pile(a, b, tab);
+	check_init(tab, a);
+	print_pile(a, b, tab);
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_operations(pile_a, pile_b, line);
-		print_pile(pile_a, pile_b);
+		ft_operations(a, b, line);
+		print_pile(a, b, tab);
 		ft_strdel(&line);
 	}
-	if (checker(pile_a, tab->len) == -1)
+	if (checker(a, tab->len) == -1)
 		ft_printf("KO");
 	else
 		ft_printf("OK");
-	free(pile_a);
-	free(pile_b);
+	free(a);
+	free(b);
 	free_s_tab(tab);
 	return (0);
 }
