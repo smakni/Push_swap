@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/23 14:28:33 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/23 15:59:57 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,10 @@ CC		=	gcc
 CFLAGS	+=	-Wall -Werror -Wextra $(HEAD)
 
 SRC		=	./src/ft_push.c \
-			./src/operations.c
+			./src/operations.c \
+			./src/init_free.c \
+			./src/check_init.c \
+			./src/print_pile.c
 
 SRC_P	=	./src_p/push_swap.c
 
