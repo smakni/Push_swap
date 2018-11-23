@@ -1,0 +1,58 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
+#    Updated: 2018/11/23 14:16:04 by smakni           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+NAME	=	push_swap
+
+NAME_C	=	checker
+
+CC		=	gcc
+
+CFLAGS	+=	-Wall -Werror -Wextra $(HEAD)
+
+SRC		=	./SRC/ft_push.c \
+			./src/operations.c
+
+SRC_P	=	./src_p/push_swap.c
+
+SRC_C	=	./src_c/checker.c
+
+HEAD	=	-I ./include
+
+LIB		=	make -C ./libft
+
+OBJ		=	$(SRC:.c=.o)
+
+OBJ_P	=	$(SRC_P:.c=.o)
+
+OBJ_C	=	$(SRC_C:.c=.o)
+
+RM		=	rm -rf
+
+all: $(NAME)
+
+$(NAME): $(OBJ_C) $(OBJ_P) $(OBJ)
+		$(LIB)
+		$(CC) -o $(NAME) $(OBJ) $(OBJ_P) ./libft/libftprintf.a
+		$(CC) -o $(NAME_C) $(OBJ) $(OBJ_C) ./libft/libftprintf.a
+
+clean:
+		make clean -C libft
+		$(RM) $(OBJ) $(OBJ_P) $(OJB_C)
+
+fclean: clean
+		make fclean -C libft
+		$(RM) $(NAME) $(NAME_C)
+
+re:	fclean all
+
+.PHONY: all clean fclean
+

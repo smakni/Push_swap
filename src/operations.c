@@ -6,12 +6,11 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:42:44 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/22 17:04:17 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/23 13:57:56 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-int		*ft_tabdup(int *tab, int len);
+#include <push_swap.h>
 
 void	ft_operations(s_pile *a, s_pile *b, char *line)
 {
