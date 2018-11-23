@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/23 14:16:04 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/23 14:28:33 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CC		=	gcc
 
 CFLAGS	+=	-Wall -Werror -Wextra $(HEAD)
 
-SRC		=	./SRC/ft_push.c \
+SRC		=	./src/ft_push.c \
 			./src/operations.c
 
 SRC_P	=	./src_p/push_swap.c
@@ -46,7 +46,7 @@ $(NAME): $(OBJ_C) $(OBJ_P) $(OBJ)
 
 clean:
 		make clean -C libft
-		$(RM) $(OBJ) $(OBJ_P) $(OJB_C)
+		$(RM) $(OBJ) $(OBJ_P) $(OBJ_C)
 
 fclean: clean
 		make fclean -C libft
