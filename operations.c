@@ -26,8 +26,6 @@ void	ft_operations(s_pile *a, s_pile *b, char *line)
 	if (ft_strequ("rra", line) == 1 || ft_strequ("rrb", line) == 1
 	   		|| ft_strequ("rrr", line) == 1)
 		ft_rotate_r(a, b, line);
-
-
 }
 
 void	ft_swap(s_pile *a, s_pile *b, char *line)
@@ -51,7 +49,6 @@ void	ft_swap(s_pile *a, s_pile *b, char *line)
 
 void	ft_push(s_pile *a, s_pile *b, char *line)
 {
-	ft_printf("OP1\n");
 	if (line[1] == 'a' && b->len > 0)
 	{
 		b->len--;
@@ -123,5 +120,3 @@ void	ft_rotate_r(s_pile *a, s_pile *b, char *line)
 		free(tmp);
 	}
 }		
-
-
