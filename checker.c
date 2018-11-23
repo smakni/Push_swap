@@ -69,7 +69,7 @@ int		checker(s_pile *a, int len)
 {
 	int i;
 
-	i = len;
+	i = len - 1;
 	while (i > 0)
 	{
 		if (a->list[i] < a->list[i - 1])
@@ -83,15 +83,27 @@ int		checker(s_pile *a, int len)
 void	print_pile(s_pile *a, s_pile *b, s_tab *tab)
 {
 	int i;
+	static int count = 0;
 
 	i = tab->len - 1;
-	ft_printf("[len_a = %d]-----------[len_b = %d]\n", a->len, b->len);
+	ft_printf("|---------------------|\n");
 	while (i >= 0)
 	{
-		ft_printf(" a[%d] = %-15db[%d] = %d\n", i, a->list[i], i, b->list[i]);
+		if (i > a->len - 1)
+			ft_printf("%-11.d|", a->list[i]);
+		else
+			ft_printf("%-11d|", a->list[i]);
+		if (i > b->len - 1)
+			ft_printf("%11.d\n", b->list[i]);
+		else	
+			ft_printf("%11d\n", b->list[i]);
 		i--;
 	}
-	ft_printf("operation >> ");
+	ft_printf("|---------------------|\n");
+	ft_printf("|pile_a         pile_b|\n");
+	ft_printf("|>>>>>>>[%5d]<<<<<<<|\n", count++);
+	ft_printf("|---------------------|\n");
+	ft_printf("|operation >> ");
 }
 
 void		init_tab(int ac, char **av, s_tab *tab)
@@ -142,6 +154,7 @@ void	free_s_tab(s_tab *tab)
 int		main(int ac, char **av)
 {
 	char	*line;
+	int count = 0;
 	s_pile 	*a;
 	s_pile	*b;
 	s_tab	*tab;
