@@ -27,9 +27,9 @@ int main (int ac, char **av)
 	while (tab->list_a[i])
 	{
 		j = i - 1;
-		while (tab->list_a[i] < tab->list[j])
+		while (tab->list_a[i] < tab->list_a[j])
 			j--;
-
+		i++;
 	}
 	print_pile(tab);
 	return (0);
