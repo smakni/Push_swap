@@ -12,26 +12,64 @@
 
 #include <push_swap.h>
 
-int main (int ac, char **av)
+void	smart_swap(s_pile *tab)
 {
-	char	*ret;
-	int		i;
-	int		j;
+	if (tab->b[0] > tab->b[1] && tab->a[tab->la - 1] > tab->a[tab->la - 2])
+		ft_swap_p(tab, "ss");
+	else if (tab->b[0] > tab->b[1])
+		ft_swap_p(tab, "sb");
+	else if (tab->a[tab->la - 1] > tab->a[tab->la - 2])
+		ft_swap_p(tab, "sa");
+}
+
+void	test_op(s_pile *tab)
+{
+	ft_push_p(tab, "pb");
+	ft_push_p(tab, "pb");
+	ft_push_p(tab, "pb");
+	ft_push_p(tab, "pb");
+}	
+
+void	step_0(s_pile *tab)
+{
+	ft_push_p(tab, "pb");
+	ft_push_p(tab, "pb");
+	smart_swap(tab);
+}
+
+void	final_step(s_pile *tab)
+{
+	while (tab->lb > 0)
+		ft_push_p(tab, "pa");
+}
+
+int 	main(int ac, char **av)
+{
 	s_pile 	*tab;
+	int		i;
 	
-	ret = ft_memalloc(1);
+	i = 0;
 	tab = ft_memalloc(sizeof(s_pile));
 	init_tab(ac, av, tab);
 	check_init(tab);
-	i = tab->len_a - 1;
-	while (tab->list_a[i])
+	if (check_pile_a(tab) == 0)
 	{
-		j = i - 1;
-		while (tab->list_a[i] < tab->list_a[j])
-			j--;
-		i++;
+		free_s_tab(tab);
+		return (0);
 	}
-	print_pile(tab);
+	else
+	{
+		step_0(tab);
+		while (i < tab->lt)
+		{
+			if (check_pile_a(tab) == 0)
+				break ;
+			test_op(tab);
+			i++;
+		}
+		final_step(tab);
+	}
+	ft_printf("%s\n", tab->ret);
 	return (0);
 }
 
