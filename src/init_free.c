@@ -14,10 +14,11 @@
 
 static void	init_pile(s_pile *tab)
 {
-	tab->list_a = ft_memalloc(sizeof(int) * tab->len_t);
-	tab->len_a = tab->len_t;
-	tab->list_b = ft_memalloc(sizeof(int) * tab->len_t);
-	tab->len_b = 0;
+	tab->a = ft_memalloc(sizeof(int) * tab->lt);
+	tab->la = tab->lt;
+	tab->b = ft_memalloc(sizeof(int) * tab->lt);
+	tab->lb = 0;
+	tab->ret = ft_memalloc(1);
 }
 
 void		init_tab(int ac, char **av, s_pile *tab)
@@ -43,7 +44,7 @@ void		init_tab(int ac, char **av, s_pile *tab)
 			i++;
 		}
 	}
-	tab->len_t = len;
+	tab->lt = len;
 	init_pile(tab);
 }
 
@@ -52,10 +53,11 @@ void	free_s_tab(s_pile *tab)
 	int i;
 
 	i = 0;
-	while (i < tab->len_t)
+	while (i < tab->lt)
 		ft_strdel(&(tab->arg[i++]));
-	free(tab->list_a);
-	free(tab->list_b);
+	free(tab->a);
+	free(tab->b);
 	free(tab->arg);
+	ft_strdel(&tab->ret);
 	free(tab);
 }

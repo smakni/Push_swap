@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.c                                       :+:      :+:    :+:   */
+/*   operations_c.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include <push_swap.h>
 
-void	ft_operations(s_pile *tab, char *line)
+void	ft_operations_c(s_pile *tab, char *line)
 {
 	if (ft_strequ("sa", line) == 1 || ft_strequ("sb", line) == 1
 			|| ft_strequ("ss", line) == 1)
@@ -32,35 +32,35 @@ void	ft_swap(s_pile *tab, char *line)
 	int tmp;
 
 	tmp = 0;
-	if (tab->len_a > 1 && (line[1] == 'a' || line[1] == 's'))
+	if (tab->la > 1 && (line[1] == 'a' || line[1] == 's'))
 	{
-		tmp = tab->list_a[tab->len_a - 1];
-		tab->list_a[tab->len_a - 1] = tab->list_a[tab->len_a - 2];
-		tab->list_a[tab->len_a - 2] = tmp;
+		tmp = tab->a[tab->la - 1];
+		tab->a[tab->la - 1] = tab->a[tab->la - 2];
+		tab->a[tab->la - 2] = tmp;
 	}
-	if (tab->len_b > 1 && (line[1] == 'b' || line[1] == 's'))
+	if (tab->lb > 1 && (line[1] == 'b' || line[1] == 's'))
 	{
-		tmp = tab->list_b[tab->len_b - 1];
-		tab->list_b[tab->len_b - 1] = tab->list_b[tab->len_b - 2];
-		tab->list_b[tab->len_b - 2] = tmp;
+		tmp = tab->b[tab->lb - 1];
+		tab->b[tab->lb - 1] = tab->b[tab->lb - 2];
+		tab->b[tab->lb - 2] = tmp;
 	}
 }
 
 void	ft_push(s_pile *tab, char *line)
 {
-	if (tab->len_b > 0 && line[1] == 'a')
+	if (tab->lb > 0 && line[1] == 'a')
 	{
-		tab->len_b--;
-		tab->list_a[tab->len_a] = tab->list_b[tab->len_b];
-		tab->list_b[tab->len_b] = 0;
-		tab->len_a++;
+		tab->lb--;
+		tab->a[tab->la] = tab->b[tab->lb];
+		tab->b[tab->lb] = 0;
+		tab->la++;
 	}
-	if (tab->len_a > 0 && line[1] == 'b')
+	if (tab->la > 0 && line[1] == 'b')
 	{
-		tab->len_a--;
-		tab->list_b[tab->len_b] = tab->list_a[tab->len_a];
-		tab->list_a[tab->len_a] = 0;
-		tab->len_b++;
+		tab->la--;
+		tab->b[tab->lb] = tab->a[tab->la];
+		tab->a[tab->la] = 0;
+		tab->lb++;
 	}
 }
 
@@ -69,22 +69,22 @@ void	ft_rotate(s_pile *tab, char *line)
 	int *tmp;
 	int i;
 
-	if (tab->len_a > 0 && (line[1] == 'a' || line[1] == 'r'))
+	if (tab->la > 0 && (line[1] == 'a' || line[1] == 'r'))
 	{
 		i = -1;
-		tmp = ft_tabdup(tab->list_a, tab->len_a);
-		while (++i < tab->len_a - 1)
-			tab->list_a[i + 1] = tmp[i];
-		tab->list_a[0] = tmp[tab->len_a - 1];
+		tmp = ft_tabdup(tab->a, tab->la);
+		while (++i < tab->la - 1)
+			tab->a[i + 1] = tmp[i];
+		tab->a[0] = tmp[tab->la - 1];
 		free(tmp);
 	}
-	if (tab->len_b > 0 && (line[1] == 'b' || line[1] == 'r'))
+	if (tab->lb > 0 && (line[1] == 'b' || line[1] == 'r'))
 	{
 		i = -1;
-		tmp = ft_tabdup(tab->list_b, tab->len_b);
-		while (++i < tab->len_b - 1)
-			tab->list_b[i + 1] = tmp[i];
-		tab->list_b[0] = tmp[tab->len_b - 1];
+		tmp = ft_tabdup(tab->b, tab->lb);
+		while (++i < tab->lb - 1)
+			tab->b[i + 1] = tmp[i];
+		tab->b[0] = tmp[tab->lb - 1];
 		free(tmp);
 	}
 }		
@@ -94,28 +94,28 @@ void	ft_rotate_r(s_pile *tab, char *line)
 	int *tmp;
 	int i;
 
-	if (tab->len_a > 0 && (line[2] == 'a' || line[2] == 'r'))
+	if (tab->la > 0 && (line[2] == 'a' || line[2] == 'r'))
 	{
-		i = tab->len_a - 1;
-		tmp = ft_tabdup(tab->list_a, tab->len_a);
+		i = tab->la - 1;
+		tmp = ft_tabdup(tab->a, tab->la);
 		while (i > 0)
 		{
-			tab->list_a[i - 1] = tmp[i];
+			tab->a[i - 1] = tmp[i];
 			i--;
 		}
-		tab->list_a[tab->len_a - 1] = tmp[0];
+		tab->a[tab->la - 1] = tmp[0];
 		free(tmp);
 	}
-	if (tab->len_b > 0 && (line[2] == 'b' || line[2] == 'r'))
+	if (tab->lb > 0 && (line[2] == 'b' || line[2] == 'r'))
 	{
-		i = tab->len_b - 1;
-		tmp = ft_tabdup(tab->list_b, tab->len_b);
+		i = tab->lb - 1;
+		tmp = ft_tabdup(tab->b, tab->lb);
 		while (i > 0)
 		{
-			tab->list_b[i - 1] = tmp[i];
+			tab->b[i - 1] = tmp[i];
 			i--;
 		}
-		tab->list_b[tab->len_b - 1] = tmp[0];
+		tab->b[tab->lb - 1] = tmp[0];
 		free(tmp);
 	}
 }		

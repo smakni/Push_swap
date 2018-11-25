@@ -53,13 +53,13 @@ void		check_init(s_pile *tab)
 	int 	i;
 	int		j;
 
-	i = tab->len_t - 1;
+	i = tab->lt - 1;
 	j = 0;
 	while (i >= 0)
 	{
 		check_nb(tab->arg[i]);
-		tab->list_a[j] = ft_atoi(tab->arg[i]);
-		check_dlb(tab->list_a, tab->list_a[j], j);
+		tab->a[j] = ft_atoi(tab->arg[i]);
+		check_dlb(tab->a, tab->a[j], j);
 		i--;
 		j++;
 	}

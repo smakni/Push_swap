@@ -20,23 +20,35 @@
 typedef struct t_pile
 {
 	char	**arg;
-	int 	*list_a;
-	int		*list_b;
-	int		len_t;
-	int		len_a;
-	int		len_b;
+	int 	*a;
+	int		*b;
+	int		lt;
+	int		la;
+	int		lb;
+	char	*ret;
 }				s_pile;
 
 int			ft_printf(const char *format, ...);
-void		ft_operations(s_pile *tab, char *line);
+void		ft_operations_c(s_pile *tab, char *line);
+void		ft_operations_p(s_pile *tab, char *line);
 void		ft_swap(s_pile *tab, char *line);
 void		ft_push(s_pile *tab, char *line);
 void		ft_rotate(s_pile *tab, char *line);
 void		ft_rotate_r(s_pile *tab, char *line);
+void		ft_swap_p(s_pile *tab, char *line);
+void		ft_push_p(s_pile *tab, char *line);
+void		ft_rotate_p(s_pile *tab, char *line);
+void		ft_rotate_r_p(s_pile *tab, char *line);
+void		ft_swap_ret(s_pile *tab, char *line);
+void		ft_push_ret(s_pile *tab, char *line);
+void		ft_rotate_ret(s_pile *tab, char *line);
+void		ft_rotate_r_ret(s_pile *tab, char *line);
 int			*ft_tabdup(int *tab, int len);
 void		init_tab(int ac, char **av, s_pile *tab);
 void		free_s_tab(s_pile *tab);
 void		print_pile(s_pile *tab);
 void		check_init(s_pile *tab);
+int			check_pile_a(s_pile *tab);
+int			check_pile_b(s_pile *tab);
 
 #endif

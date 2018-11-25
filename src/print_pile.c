@@ -17,18 +17,18 @@ void	print_pile(s_pile *tab)
 	int i;
 	static int count = 0;
 
-	i = tab->len_t - 1;
+	i = tab->lt - 1;
 	ft_printf("\n|---------------------|\n");
 	while (i >= 0)
 	{
-		if (i > tab->len_a - 1)
-			ft_printf("%-11.d|", tab->list_a[i]);
+		if (i > tab->la - 1)
+			ft_printf("%-11.d%d", tab->a[i], i);
 		else
-			ft_printf("%-11d|", tab->list_a[i]);
-		if (i > tab->len_b - 1)
-			ft_printf("%11.d\n", tab->list_b[i]);
+			ft_printf("%-11d%d", tab->a[i], i);
+		if (i > tab->lb - 1)
+			ft_printf("%11.d\n", tab->b[i]);
 		else	
-			ft_printf("%11d\n", tab->list_b[i]);
+			ft_printf("%11d\n", tab->b[i]);
 		i--;
 	}
 	ft_printf("|---------------------|\n");

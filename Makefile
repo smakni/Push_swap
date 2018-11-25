@@ -19,14 +19,17 @@ CC		=	gcc
 CFLAGS	+=	-Wall -Werror -Wextra $(HEAD)
 
 SRC		=	./src/ft_push.c \
-			./src/operations.c \
 			./src/init_free.c \
 			./src/check_init.c \
-			./src/print_pile.c
+			./src/print_pile.c \
+			./src/ft_check.c
 
-SRC_P	=	./src_p/push_swap.c
+SRC_P	=	./src_p/push_swap.c \
+			./src_p/operations_p.c \
+			./src_p/operations_ret.c
 
-SRC_C	=	./src_c/checker.c
+SRC_C	=	./src_c/checker.c \
+			./src_c/operations_c.c
 
 HEAD	=	-I ./include
 

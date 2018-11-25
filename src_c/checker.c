@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_arg.c                                        :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,21 +11,6 @@
 /* ************************************************************************** */
 
 #include <push_swap.h>
-
-int		checker(s_pile *tab)
-{
-	int i;
-
-	i = tab->len_t - 1;
-	while (i > 0)
-	{
-		if (tab->list_a[i] < tab->list_a[i - 1])
-			i--;
-		else
-			return (-1);
-	}
-	return (0);
-}
 
 int		main(int ac, char **av)
 {
@@ -38,11 +23,12 @@ int		main(int ac, char **av)
 	print_pile(tab);
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_operations(tab, line);
+		ft_operations_c(tab, line);
 		print_pile(tab);
+		ft_printf("OP = %s", line);
 		ft_strdel(&line);
 	}
-	if (checker(tab) == -1)
+	if (check_pile_a(tab) == -1)
 		ft_printf("KO");
 	else
 		ft_printf("OK");
