@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/23 15:59:32 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/26 19:59:16 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ typedef struct t_pile
 	int		lt;
 	int		la;
 	int		lb;
-	char	*ret;
 }				s_pile;
+
+typedef struct t_ret
+{
+	char 	*ret;
+	char 	*tmp;
+	int		max;
+	int		min;
+}				s_ret;
 
 int			ft_printf(const char *format, ...);
 void		ft_operations_c(s_pile *tab, char *line);
@@ -35,10 +42,6 @@ void		ft_swap(s_pile *tab, char *line);
 void		ft_push(s_pile *tab, char *line);
 void		ft_rotate(s_pile *tab, char *line);
 void		ft_rotate_r(s_pile *tab, char *line);
-void		ft_swap_p(s_pile *tab, char *line);
-void		ft_push_p(s_pile *tab, char *line);
-void		ft_rotate_p(s_pile *tab, char *line);
-void		ft_rotate_r_p(s_pile *tab, char *line);
 void		ft_swap_ret(s_pile *tab, char *line);
 void		ft_push_ret(s_pile *tab, char *line);
 void		ft_rotate_ret(s_pile *tab, char *line);
@@ -50,5 +53,13 @@ void		print_pile(s_pile *tab);
 void		check_init(s_pile *tab);
 int			check_pile_a(s_pile *tab);
 int			check_pile_b(s_pile *tab);
+int			first_a(s_pile *tab, s_ret *ret, int p);
+void		first_b(s_pile *tab, s_ret *ret, int p);
+void		in_place_b(s_pile *tab, s_ret *ret,  int p);
+int			ft_count_n(char *line);
+void		init_ret(s_pile *tab, s_ret *ret);
+void		check_min_max(s_pile *tab, s_ret *ret);
+int			find_max(s_pile *tab, s_ret *ret);
+void		exc_op(s_pile *tab, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/23 15:54:23 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/26 17:29:05 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,13 @@ static void	init_pile(s_pile *tab)
 	tab->la = tab->lt;
 	tab->b = ft_memalloc(sizeof(int) * tab->lt);
 	tab->lb = 0;
-	tab->ret = ft_memalloc(1);
+}
+
+void		init_ret(s_pile *tab, s_ret *ret)
+{
+	ret->ret = ft_memalloc(1);
+	ret->tmp = ft_memalloc(1);
+	check_min_max(tab, ret);
 }
 
 void		init_tab(int ac, char **av, s_pile *tab)
@@ -58,6 +64,5 @@ void	free_s_tab(s_pile *tab)
 	free(tab->a);
 	free(tab->b);
 	free(tab->arg);
-	ft_strdel(&tab->ret);
 	free(tab);
 }
