@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:51:48 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/23 15:52:58 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/26 15:34:39 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,4 @@ void	print_pile(s_pile *tab)
 	ft_printf("|pile_a         pile_b|\n");
 	ft_printf("|>>>>>>>[%5d]<<<<<<<|\n", count++);
 	ft_printf("|---------------------|\n");
-	ft_printf("|operation >> ");
 }
