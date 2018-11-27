@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/26 20:40:44 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/27 17:46:14 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,16 @@ void	place_a(s_pile *tab, s_ret *ret)
 static	void final_step(s_pile *tab, s_ret *ret)
 {
 	int i;
-	int j;
 
-	j = 0;
-	i = find_max(tab, ret);
-	while (tab->b[tab->lb - j] != tab->b[i] && j < tab->lb)
+	i = tab->lb - 1;
+//	ft_printf("final_1");
+//	ft_printf("max = %d\n", ret->max);
+	while (tab->b[i] != ret->max)
 	{
 		ret->ret = ft_strjoin_free1(ret->ret, "rb\n");
 		ft_operations_c(tab, "rb");
-		j++;
-		if (tab->b[tab->lb - i] == tab->b[find_max(tab, ret)])
-			break ;
 	}
+//	print_pile(tab);
 	while (tab->lb > 0)
 	{
 		ret->ret = ft_strjoin_free1(ret->ret, "pa\n");
@@ -81,6 +79,7 @@ int 	main(int ac, char **av)
 	init_tab(ac, av, tab);
 	check_init(tab);
 	init_ret(tab, ret);
+//	ft_printf("max = %d\n", ret->max);
 	if (check_pile_a(tab) == 0)
 	{
 		free_s_tab(tab);
@@ -89,18 +88,16 @@ int 	main(int ac, char **av)
 	else
 	{
 		step_0(tab, ret);
-		print_pile(tab);
+//		print_pile(tab);
 		while (i < tab->la)
 		{
-			if (tab->la == 1 && tab->a[0] == ret->min)
-				break ;
 			place_a(tab, ret);
 			exc_op(tab, ret->tmp);
-			print_pile(tab);
+//			print_pile(tab);
 		}
 	}
 	final_step(tab, ret);
-	print_pile(tab);
+//	print_pile(tab);
 	ft_printf("%s\n", ret->ret);
 	ft_strdel(&ret->tmp);
 	ft_strdel(&ret->ret);

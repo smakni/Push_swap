@@ -6,44 +6,16 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/26 20:40:42 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/27 17:46:11 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		first_a(s_pile *tab, s_ret *ret, int p)
+void	up_a(s_pile *tab, s_ret *ret, int p)
 {
 	int i;
 
-	i = 0;
-	ft_strdel(&ret->tmp);
-	ret->tmp = ft_memalloc(1);
-	ft_printf("\nDEBUG\n");
-	ft_printf("tab->a[p] = %d\n", tab->a[p]);
-	ft_printf("tab->a = %d < tab->b = %d\n", tab->a[p], tab->b[tab->lb - 1 - i]);
-	while (tab->a[p] > tab->b[tab->lb - 1 - i] && tab->lb - 1 - i > 0)
-	{	
-		i++;
-	}
-	ft_printf("i = %d\n", i);
-	ft_printf("tab->a = %d < tab->b = %d\n", tab->a[p], tab->b[tab->lb - 1 - i]);
-	if (i != 0 && i <= tab->lb / 2)
-	{
-		while (i > 0)
-		{
-			ret->tmp = ft_strjoin(ret->tmp, "rb\n");
-			i--;
-		}
-	}
-	else if (i != 0)
-	{
-		while (i > 0)
-		{
-			ret->tmp = ft_strjoin(ret->tmp, "rrb\n");
-			i--;
-		}
-	}
 	i = p;
 	if (i >= tab->la / 2)
 	{
@@ -61,30 +33,87 @@ int		first_a(s_pile *tab, s_ret *ret, int p)
 			i--;
 		}
 	}
-	ret->tmp = ft_strjoin_free1(ret->tmp, "pb\n");
-	ft_printf("phase2 = %s\n", ret->tmp);
-	ft_printf("nb_coups = %d\n", ft_count_n(ret->tmp));
-	return (ft_count_n(ret->tmp));
 }
 
-void	first_b(s_pile *tab, s_ret *ret, int p)
+int		find_max_in_b(s_pile *tab)
 {
-	if (p >= tab->lb / 2)
+	int i;
+	int max;
+
+	i = tab->lb - 1;
+	max = tab->b[i--];
+	while (i >= 0)
 	{
-		while (p < tab->lb - 1)
+		if (tab->b[i] > max)
+			max = tab->b[i];
+		i--;
+	}
+	return (max);
+}
+
+int		first_a(s_pile *tab, s_ret *ret, int p)
+{
+	int i;
+	int j;
+	int min_frame;
+	int max_frame;
+
+	i = tab->lb - 1;
+	j = 0;
+	ft_strdel(&ret->tmp);
+	ret->tmp = ft_memalloc(1);
+	min_frame = find_min_frame(tab, tab->a[p]);
+	max_frame = find_max_frame(tab, tab->a[p]);
+//	ft_printf("tab->a[p] = %d\n", tab->a[p]);
+	if (tab->a[p] == min_frame)
+	{
+		max_frame = find_max_in_b(tab);
+		while (tab->b[i] != max_frame && i > 0)
 		{	
+			i--;
+			j++;
+		}
+	}
+	else if (tab->a[p] == max_frame)
+	{
+		while (tab->b[i] != min_frame && i > 0)
+		{	
+			i--;
+			j++;
+		}
+	}
+	else
+	{
+		while (tab->b[i] != min_frame && i > 0)
+		{	
+			//ft_printf("tab->b = %d | i = %d\n", tab->b[i], i);	
+			i--;
+			j++;
+		}
+	}
+	//ft_printf("min = %d | max = %d\n", min_frame, max_frame);
+//	ft_printf("j = %d\n", j);
+	up_a(tab, ret, p);
+	if (j < tab->lb)
+	{	
+		while (j > 0)
+		{
 			ret->tmp = ft_strjoin(ret->tmp, "rb\n");
-			p++;
+			j--;
 		}
 	}
 	else
 	{	
-		while (p >= 0)
-		{		
+		while (j > 0)
+		{
 			ret->tmp = ft_strjoin(ret->tmp, "rrb\n");
-			p--;
+			j--;
 		}
 	}
+	ret->tmp = ft_strjoin_free1(ret->tmp, "pb\n");
+//	ft_printf("op = %s\n", ret->tmp);
+//	ft_printf(">>>nb_coups = %d\n\n", ft_count_n(ret->tmp));
+	return (ft_count_n(ret->tmp));
 }
 
 int		ft_count_n(char *line)
@@ -110,7 +139,7 @@ void	check_min_max(s_pile *tab, s_ret *ret)
 	i = 0;
 	ret->max = tab->a[i];
 	ret->min = tab->a[i];
-	while (i < tab->la - 1)
+	while (i <= tab->la - 1)
 	{
 		if (tab->a[i] > ret->max)
 			ret->max = tab->a[i];
