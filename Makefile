@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/26 17:30:27 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/27 14:55:59 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC		=	./src/ft_push.c \
 			./src/print_pile.c \
 			./src/ft_check.c \
 			./src/operations.c \
-			./src/check_op.c
+			./src/check_op.c \
+			./src/frames.c
 
 SRC_P	=	./src_p/push_swap.c \
 

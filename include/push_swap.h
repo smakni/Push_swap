@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/26 19:59:16 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/27 16:54:21 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ void		init_ret(s_pile *tab, s_ret *ret);
 void		check_min_max(s_pile *tab, s_ret *ret);
 int			find_max(s_pile *tab, s_ret *ret);
 void		exc_op(s_pile *tab, char *str);
+int			find_min_frame(s_pile *tab, int x);
+int			find_max_frame(s_pile *tab, int x);
 
 #endif
