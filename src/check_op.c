@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_op.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 18:06:15 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 00:33:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,11 @@ void	cycle_b(s_pile *tab, s_sol *sol, int j)
 
 int		first_a(s_pile *tab, s_sol *tmp, int p)
 {
-	int i;
 	int j;
 	int min_frame;
 	int max_frame;
 
 	init_solution(tmp);
-	i = tab->lb - 1;
 	min_frame = find_min_frame(tab, tab->a[p]);
 	max_frame = find_max_frame(tab, tab->a[p]);
 	j = check_frames(tab, min_frame, max_frame, p);	
