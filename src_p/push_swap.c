@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 16:16:24 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 16:54:05 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ static	void final_step(s_pile *tab)
 
 	i = tab->lb - 1;
 	max = check_max(tab);
-	//ft_printf("max = %d", max);
 	while (tab->b[i] != max)
 		i--;
 	if (i > tab->lb / 2)

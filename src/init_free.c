@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 14:13:35 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 18:05:59 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,17 @@ void	free_s_tab(s_pile *tab)
 	free(tab->b);
 	free(tab->arg);
 	free(tab);
+}
+
+void	init_solution(s_sol *sol)
+{
+	sol->sa = 0;
+	sol->sb = 0;
+	sol->ss = 0;
+	sol->ra = 0;
+	sol->rb = 0;
+	sol->rr = 0;
+	sol->rra = 0;
+	sol->rrb = 0;
+	sol->rrr = 0;
 }

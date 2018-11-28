@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:32:56 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/23 16:07:43 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 16:51:14 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int ac, char **av)
 	print_pile(tab);
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_operations_c(tab, line);
+		ft_operations(tab, line);
 		print_pile(tab);
 		ft_printf("OP = %s", line);
 		ft_strdel(&line);

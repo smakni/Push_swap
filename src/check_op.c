@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 16:16:23 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 18:06:15 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,6 @@ int		analyse_solution(s_sol *tmp)
 		}
 	}
 	return (tmp->ra + tmp->rb + tmp->rr + tmp->rra + tmp->rrb + tmp->rrr);
-}	
-
-void	init_solution(s_sol *sol)
-{
-	sol->sa = 0;
-	sol->sb = 0;
-	sol->ss = 0;
-	sol->ra = 0;
-	sol->rb = 0;
-	sol->rr = 0;
-	sol->rra = 0;
-	sol->rrb = 0;
-	sol->rrr = 0;
 }
 
 void	save_solution(s_sol *sol, s_sol *tmp)
@@ -164,16 +151,6 @@ int		check_max(s_pile *tab)
 		i++;
 	}
 	return (max);
-}
-
-int		find_max(s_pile *tab, s_ret *ret)
-{
-	int i;
-
-	i = tab->lb - 1;
-	while (tab->b[i] != ret->max)
-		i--;
-	return (i);
 }
 
 void	exc_op(s_pile *tab, s_sol *sol)
