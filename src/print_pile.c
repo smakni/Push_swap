@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:51:48 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/27 18:01:43 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 10:49:57 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	print_pile(s_pile *tab)
 	ft_printf("|>>>>>>>[%5d]<<<<<<<|\n", count++);
 	ft_printf("|---------------------|\n");
 }
-/*
-void	print_pile(s_pile *tab)
+
+void	print_pile_test(s_pile *tab)
 {
 	int i;
 	static int count = 0;
@@ -60,4 +60,4 @@ void	print_pile(s_pile *tab)
 	ft_printf("|pile_a         pile_b|\n");
 	ft_printf("|>>>>>>>[%5d]<<<<<<<|\n", count++);
 	ft_printf("|---------------------|\n");
-}*/
+}
