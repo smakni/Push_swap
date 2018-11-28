@@ -6,80 +6,91 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/27 17:46:14 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 16:16:24 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
 
-static void	step_0(s_pile *tab, s_ret *ret)
+static void	step_0(s_pile *tab)
 {
-	ret->ret = ft_strdup("pb\npb\n");
-	ft_operations_p(tab, "pb\n");
-	ft_operations_p(tab, "pb\n");
+	ft_operations(tab, "pb");
+	ft_operations(tab, "pb");
+	ft_printf("pb\n");
+	ft_printf("pb\n");
+
 }
 
-void	place_a(s_pile *tab, s_ret *ret)
+void	place_a(s_pile *tab, s_sol *sol)
 {
 	int i;
-	char *tmp;
 	int save;
-	int	turns;;
+	int	turns;
+	s_sol *tmp;
 
-
+	tmp = ft_memalloc(sizeof(s_sol));
+	init_solution(tmp);
 	i = tab->la - 1;
-	save = first_a(tab, ret, i--);
-	tmp = ft_strdup(ret->tmp);
+	save = first_a(tab, tmp, i--);
+	save_solution(tmp, sol);
 	while (i >= 0)
 	{
-		if ((turns = first_a(tab, ret, i)) < save)
+		if ((turns = first_a(tab, tmp, i)) < save)
 		{	
 			save = turns;
-			ft_strdel(&tmp);
-			tmp = ft_strdup(ret->tmp);
+			save_solution(tmp, sol);
 		}
 		i--;
 	}
-	ft_strdel(&ret->tmp);
-	ret->tmp = ft_strdup(tmp);
-	ft_strdel(&tmp);
-	ret->ret = ft_strjoin_free1(ret->ret, ret->tmp);
 }
 
-static	void final_step(s_pile *tab, s_ret *ret)
+static	void final_step(s_pile *tab)
 {
 	int i;
+	int max;
 
 	i = tab->lb - 1;
-//	ft_printf("final_1");
-//	ft_printf("max = %d\n", ret->max);
-	while (tab->b[i] != ret->max)
+	max = check_max(tab);
+	//ft_printf("max = %d", max);
+	while (tab->b[i] != max)
+		i--;
+	if (i > tab->lb / 2)
 	{
-		ret->ret = ft_strjoin_free1(ret->ret, "rb\n");
-		ft_operations_c(tab, "rb");
+		i = tab->lb - 1;
+		while (tab->b[i] != max)
+		{
+			ft_operations(tab, "rb");
+			ft_printf("rb\n");
+		}
 	}
-//	print_pile(tab);
+	else
+	{
+		i = tab->lb - 1;	
+		while (tab->b[i] != max)
+		{
+			ft_operations(tab, "rrb");
+			ft_printf("rrb\n");
+		}
+	}
 	while (tab->lb > 0)
 	{
-		ret->ret = ft_strjoin_free1(ret->ret, "pa\n");
-		ft_operations_c(tab, "pa");
+		ft_operations(tab, "pa");
+		ft_printf("pa\n");
 	}
 }
 
 int 	main(int ac, char **av)
 {
 	s_pile 	*tab;
-	s_ret	*ret;
+	s_sol 	*sol;
 	int		i;
 	
 	i = 0;
 	tab = ft_memalloc(sizeof(s_pile));
-	ret = ft_memalloc(sizeof(s_ret));
+	sol = ft_memalloc(sizeof(s_sol));
 	init_tab(ac, av, tab);
 	check_init(tab);
-	init_ret(tab, ret);
-//	ft_printf("max = %d\n", ret->max);
 	if (check_pile_a(tab) == 0)
 	{
 		free_s_tab(tab);
@@ -87,20 +98,14 @@ int 	main(int ac, char **av)
 	}
 	else
 	{
-		step_0(tab, ret);
-//		print_pile(tab);
+		step_0(tab);
 		while (i < tab->la)
 		{
-			place_a(tab, ret);
-			exc_op(tab, ret->tmp);
-//			print_pile(tab);
+			place_a(tab, sol);
+			exc_op(tab, sol);
 		}
 	}
-	final_step(tab, ret);
-//	print_pile(tab);
-	ft_printf("%s\n", ret->ret);
-	ft_strdel(&ret->tmp);
-	ft_strdel(&ret->ret);
+	final_step(tab);
 	free_s_tab(tab);
 	return (0);
 }

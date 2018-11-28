@@ -6,114 +6,132 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/27 17:46:11 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/28 16:16:23 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	up_a(s_pile *tab, s_ret *ret, int p)
+void	cycle_a(s_pile *tab, s_sol *sol, int p)
 {
 	int i;
+	int j;
 
 	i = p;
+	j = 0;
 	if (i >= tab->la / 2)
 	{
 		while (i < tab->la - 1)
 		{	
-			ret->tmp = ft_strjoin(ret->tmp, "ra\n");
 			i++;
+			j++;
 		}
+		sol->ra = j;
 	}
 	else
 	{	
 		while (i >= 0)
 		{		
-			ret->tmp = ft_strjoin(ret->tmp, "rra\n");
 			i--;
+			j++;
 		}
+		sol->rra = j;
 	}
 }
 
-int		find_max_in_b(s_pile *tab)
+void	cycle_b(s_pile *tab, s_sol *sol, int j)
 {
 	int i;
-	int max;
 
-	i = tab->lb - 1;
-	max = tab->b[i--];
-	while (i >= 0)
-	{
-		if (tab->b[i] > max)
-			max = tab->b[i];
-		i--;
+	i = 0;
+	if (j < tab->lb)
+	{	
+		while (j > 0)
+		{
+			j--;
+			i++;
+		}
+		sol->rb = i;
 	}
-	return (max);
+	else
+	{	
+		while (j > 0)
+		{
+			j--;
+			i++;
+		}
+		sol->rrb = i;
+	}
 }
 
-int		first_a(s_pile *tab, s_ret *ret, int p)
+int		first_a(s_pile *tab, s_sol *tmp, int p)
 {
 	int i;
 	int j;
 	int min_frame;
 	int max_frame;
 
+	init_solution(tmp);
 	i = tab->lb - 1;
-	j = 0;
-	ft_strdel(&ret->tmp);
-	ret->tmp = ft_memalloc(1);
 	min_frame = find_min_frame(tab, tab->a[p]);
 	max_frame = find_max_frame(tab, tab->a[p]);
-//	ft_printf("tab->a[p] = %d\n", tab->a[p]);
-	if (tab->a[p] == min_frame)
+	j = check_frames(tab, min_frame, max_frame, p);	
+	cycle_a(tab, tmp, p);
+	cycle_b(tab, tmp, j);
+	return (analyse_solution(tmp));
+}
+
+int		analyse_solution(s_sol *tmp)
+{
+	s_sol *tmp2;
+
+	tmp2 = ft_memalloc(sizeof(s_sol));
+	save_solution(tmp, tmp2);
+	if (tmp2->rb > 0 && tmp2->ra > 0)
 	{
-		max_frame = find_max_in_b(tab);
-		while (tab->b[i] != max_frame && i > 0)
-		{	
-			i--;
-			j++;
-		}
-	}
-	else if (tab->a[p] == max_frame)
-	{
-		while (tab->b[i] != min_frame && i > 0)
-		{	
-			i--;
-			j++;
-		}
-	}
-	else
-	{
-		while (tab->b[i] != min_frame && i > 0)
-		{	
-			//ft_printf("tab->b = %d | i = %d\n", tab->b[i], i);	
-			i--;
-			j++;
-		}
-	}
-	//ft_printf("min = %d | max = %d\n", min_frame, max_frame);
-//	ft_printf("j = %d\n", j);
-	up_a(tab, ret, p);
-	if (j < tab->lb)
-	{	
-		while (j > 0)
+		while (tmp->rb > 0 && tmp->ra > 0)
 		{
-			ret->tmp = ft_strjoin(ret->tmp, "rb\n");
-			j--;
+			tmp->rr++;
+			tmp->ra--;
+			tmp->rb--;
 		}
 	}
-	else
-	{	
-		while (j > 0)
+	if (tmp2->rrb > 0 && tmp2->rra > 0)
+	{
+		while (tmp->rrb > 0 && tmp->rra > 0)
 		{
-			ret->tmp = ft_strjoin(ret->tmp, "rrb\n");
-			j--;
+			tmp->rrr++;
+			tmp->rra--;
+			tmp->rrb--;
 		}
 	}
-	ret->tmp = ft_strjoin_free1(ret->tmp, "pb\n");
-//	ft_printf("op = %s\n", ret->tmp);
-//	ft_printf(">>>nb_coups = %d\n\n", ft_count_n(ret->tmp));
-	return (ft_count_n(ret->tmp));
+	return (tmp->ra + tmp->rb + tmp->rr + tmp->rra + tmp->rrb + tmp->rrr);
+}	
+
+void	init_solution(s_sol *sol)
+{
+	sol->sa = 0;
+	sol->sb = 0;
+	sol->ss = 0;
+	sol->ra = 0;
+	sol->rb = 0;
+	sol->rr = 0;
+	sol->rra = 0;
+	sol->rrb = 0;
+	sol->rrr = 0;
+}
+
+void	save_solution(s_sol *sol, s_sol *tmp)
+{
+	tmp->sa = sol->sa;
+	tmp->sb = sol->sb;
+	tmp->ss = sol->ss;
+	tmp->ra = sol->ra;
+	tmp->rb = sol->rb;
+	tmp->rr = sol->rr;
+	tmp->rra = sol->rra;
+	tmp->rrb = sol->rrb;
+	tmp->rrr = sol->rrr;
 }
 
 int		ft_count_n(char *line)
@@ -132,21 +150,20 @@ int		ft_count_n(char *line)
 	return (count);
 }
 
-void	check_min_max(s_pile *tab, s_ret *ret)
+int		check_max(s_pile *tab)
 {
 	int i;
+	int max;
 
 	i = 0;
-	ret->max = tab->a[i];
-	ret->min = tab->a[i];
-	while (i <= tab->la - 1)
+	max = tab->b[i];
+	while (i <= tab->lb - 1)
 	{
-		if (tab->a[i] > ret->max)
-			ret->max = tab->a[i];
-		if (tab->a[i] < ret->min)
-			ret->min = tab->a[i];
+		if (tab->b[i] > max)
+			max = tab->b[i];
 		i++;
 	}
+	return (max);
 }
 
 int		find_max(s_pile *tab, s_ret *ret)
@@ -159,30 +176,53 @@ int		find_max(s_pile *tab, s_ret *ret)
 	return (i);
 }
 
-static int	len_x(const char *str, int x, char c)
+void	exc_op(s_pile *tab, s_sol *sol)
 {
-	int count;
-
-	count = 1;
-	while (str[x + count] && str[x + count] != c)
-		count++;
-	return (count);
-}
-
-void	exc_op(s_pile *tab, char *str)
-{
-	int 	i;
-	int		len;
-	char 	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	while (str[i])
+	while (sol->sa-- > 0)
 	{
-		len = len_x(str, i, '\n');
-		tmp = ft_strsub(str, i, len);
-		i += len_x(str, i, '\n') + 1;
-		ft_operations_c(tab, tmp);
-		ft_strdel(&tmp);
+		ft_operations(tab, "sa");
+		ft_printf("sa\n");
 	}
+	while (sol->sb-- > 0)
+	{
+		ft_operations(tab, "sb");
+		ft_printf("sb\n");
+	}
+	while (sol->ss-- > 0)
+	{
+		ft_operations(tab, "ss");
+		ft_printf("sa\n");
+	}
+	while (sol->ra-- > 0)
+	{
+		ft_operations(tab, "ra");
+		ft_printf("ra\n");
+	}
+	while (sol->rb-- > 0)
+	{
+		ft_operations(tab, "rb");
+		ft_printf("rb\n");
+	}
+	while (sol->rr-- > 0)
+	{
+		ft_operations(tab, "rr");
+		ft_printf("rr\n");
+	}
+	while (sol->rra-- > 0)
+	{
+		ft_operations(tab, "rra");
+		ft_printf("rra\n");
+	}
+	while (sol->rrb-- > 0)
+	{
+		ft_operations(tab, "rrb");
+		ft_printf("rrb\n");
+	}
+	while (sol->rrr-- > 0)
+	{
+		ft_operations(tab, "rrr");
+		ft_printf("rrr\n");
+	}
+	ft_operations(tab, "pb");
+	ft_printf("pb\n");
 }
