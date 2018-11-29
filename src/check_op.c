@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 00:33:32 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/29 00:48:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,14 @@ void	cycle_a(s_pile *tab, s_sol *sol, int p)
 	j = 0;
 	if (i >= tab->la / 2)
 	{
-		while (i < tab->la - 1)
-		{	
-			i++;
+		while (i++ < tab->la - 1)
 			j++;
-		}
 		sol->ra = j;
 	}
 	else
 	{	
-		while (i >= 0)
-		{		
-			i--;
+		while (i-- >= 0)
 			j++;
-		}
 		sol->rra = j;
 	}
 }
@@ -46,20 +40,14 @@ void	cycle_b(s_pile *tab, s_sol *sol, int j)
 	i = 0;
 	if (j < tab->lb)
 	{	
-		while (j > 0)
-		{
-			j--;
+		while (j-- > 0)
 			i++;
-		}
 		sol->rb = i;
 	}
 	else
 	{	
-		while (j > 0)
-		{
-			j--;
+		while (j-- > 0)
 			i++;
-		}
 		sol->rrb = i;
 	}
 }
