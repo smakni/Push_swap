@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/27 14:55:59 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/29 20:27:01 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,11 @@ NAME_C	=	checker
 
 CC		=	gcc
 
-CFLAGS	+=	-Wall -Werror -Wextra $(HEAD)
+CFLAGS	+=	-Wall -Werror -Wextra $(HEAD) 
 
-SRC		=	./src/ft_push.c \
-			./src/init_free.c \
+CFLAGS  +=	$(shell sdl2-config --cflags)
+
+SRC		=	./src/init_free.c \
 			./src/check_init.c \
 			./src/print_pile.c \
 			./src/ft_check.c \
@@ -28,6 +29,7 @@ SRC		=	./src/ft_push.c \
 			./src/frames.c
 
 SRC_P	=	./src_p/push_swap.c \
+			./src_p/algo_4.c
 
 SRC_C	=	./src_c/checker.c \
 
@@ -48,7 +50,7 @@ all: $(NAME)
 $(NAME): $(OBJ_C) $(OBJ_P) $(OBJ)
 		$(LIB)
 		$(CC) -o $(NAME) $(OBJ) $(OBJ_P) ./libft/libftprintf.a
-		$(CC) -o $(NAME_C) $(OBJ) $(OBJ_C) ./libft/libftprintf.a
+		$(CC) -o $(NAME_C) $(OBJ) $(OBJ_C) ./libft/libftprintf.a $(shell sdl2-config --libs)
 
 clean:
 		make clean -C libft

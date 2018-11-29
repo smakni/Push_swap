@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 17:38:44 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 20:39:36 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,20 @@ void		print_pile_test(s_pile *tab);
 void		check_init(s_pile *tab);
 int			check_pile_a(s_pile *tab);
 int			check_pile_b(s_pile *tab);
-int			first_a(s_pile *tab, s_sol *tmp, int p);
-void		first_b(s_pile *tab, s_sol *sol, int p);
 void		in_place_b(s_pile *tab, s_sol *sol,  int p);
 int			ft_count_n(char *line);
-int			check_max(s_pile *tab);
+int			find_max_in_b(s_pile *tab);
+int			find_i_max_in_a(s_pile *tab);
+int			find_i_max_in_b(s_pile *tab);
+int			find_i_min_in_a(s_pile *tab);
 void		exc_op(s_pile *tab, s_sol *sol);
 int			find_min_frame(s_pile *tab, int x);
 int			find_max_frame(s_pile *tab, int x);
 int			check_frames(s_pile *tab, int min_frame, int max_frame, int p);
 void		save_solution(s_sol *tmp, s_sol *sol);
 void		init_solution(s_sol *sol);
-int			analyse_solution(s_sol *tmp);
+int			check_solutions(s_pile *tab, s_sol *tmp, int p);
+void		cycle_a(s_pile *tab, s_sol *sol, int p);
+void		algo_4(s_pile *tab, s_sol *sol);
 
 #endif

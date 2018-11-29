@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 00:48:49 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/29 21:16:26 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	cycle_a(s_pile *tab, s_sol *sol, int p)
 	}
 }
 
-void	cycle_b(s_pile *tab, s_sol *sol, int j)
+static void	cycle_b(s_pile *tab, s_sol *sol, int j)
 {
 	int i;
 
@@ -52,22 +52,7 @@ void	cycle_b(s_pile *tab, s_sol *sol, int j)
 	}
 }
 
-int		first_a(s_pile *tab, s_sol *tmp, int p)
-{
-	int j;
-	int min_frame;
-	int max_frame;
-
-	init_solution(tmp);
-	min_frame = find_min_frame(tab, tab->a[p]);
-	max_frame = find_max_frame(tab, tab->a[p]);
-	j = check_frames(tab, min_frame, max_frame, p);	
-	cycle_a(tab, tmp, p);
-	cycle_b(tab, tmp, j);
-	return (analyse_solution(tmp));
-}
-
-int		analyse_solution(s_sol *tmp)
+static int	analyse_solution(s_sol *tmp)
 {
 	s_sol *tmp2;
 
@@ -94,6 +79,21 @@ int		analyse_solution(s_sol *tmp)
 	return (tmp->ra + tmp->rb + tmp->rr + tmp->rra + tmp->rrb + tmp->rrr);
 }
 
+int		check_solutions(s_pile *tab, s_sol *tmp, int p)
+{
+	int j;
+	int min_frame;
+	int max_frame;
+
+	init_solution(tmp);
+	min_frame = find_min_frame(tab, tab->a[p]);
+	max_frame = find_max_frame(tab, tab->a[p]);
+	j = check_frames(tab, min_frame, max_frame, p);	
+	cycle_a(tab, tmp, p);
+	cycle_b(tab, tmp, j);
+	return (analyse_solution(tmp));
+}
+
 void	save_solution(s_sol *sol, s_sol *tmp)
 {
 	tmp->sa = sol->sa;
@@ -105,38 +105,6 @@ void	save_solution(s_sol *sol, s_sol *tmp)
 	tmp->rra = sol->rra;
 	tmp->rrb = sol->rrb;
 	tmp->rrr = sol->rrr;
-}
-
-int		ft_count_n(char *line)
-{
-	int i;
-	int count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == '\n')
-			count++;
-		i++;
-	}
-	return (count);
-}
-
-int		check_max(s_pile *tab)
-{
-	int i;
-	int max;
-
-	i = 0;
-	max = tab->b[i];
-	while (i <= tab->lb - 1)
-	{
-		if (tab->b[i] > max)
-			max = tab->b[i];
-		i++;
-	}
-	return (max);
 }
 
 void	exc_op(s_pile *tab, s_sol *sol)
@@ -186,6 +154,6 @@ void	exc_op(s_pile *tab, s_sol *sol)
 		ft_operations(tab, "rrr");
 		ft_printf("rrr\n");
 	}
-	ft_operations(tab, "pb");
-	ft_printf("pb\n");
+	//ft_operations(tab, "pb");
+	//ft_printf("pb\n");
 }

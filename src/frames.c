@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 14:15:15 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 16:16:14 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 21:11:20 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int		find_max_frame(s_pile *tab, int x)
 	return (frame_max);
 }
 
-static	int		find_max_in_b(s_pile *tab)
+int		find_max_in_b(s_pile *tab)
 {
 	int i;
 	int max;
@@ -70,6 +70,87 @@ static	int		find_max_in_b(s_pile *tab)
 	return (max);
 }
 
+static	int		find_min_in_b(s_pile *tab)
+{
+	int i;
+	int min;
+
+	i = tab->lb - 1;
+	min = tab->b[i--];
+	while (i >= 0)
+	{
+		if (tab->b[i] < min)
+			min = tab->b[i];
+		i--;
+	}
+	return (min);
+}
+
+int		find_i_max_in_a(s_pile *tab)
+{
+	int i;
+	int j;
+	int max;
+
+
+	i = tab->la - 1;
+	j = i;
+	max = tab->a[i--];
+	while (i >= 0)
+	{
+		if (tab->a[i] > max)
+		{
+			max = tab->a[i];
+			j = i;
+		}
+		i--;
+	}
+	return (j);
+}
+
+int		find_i_max_in_b(s_pile *tab)
+{
+	int i;
+	int j;
+	int max;
+
+
+	i = tab->lb - 1;
+	j = i;
+	max = tab->b[i--];
+	while (i >= 0)
+	{
+		if (tab->b[i] > max)
+		{
+			max = tab->b[i];
+			j = i;
+		}
+		i--;
+	}
+	return (j);
+}
+
+int		find_i_min_in_a(s_pile *tab)
+{
+	int i;
+	int j;
+	int min;
+
+	i = tab->la - 1;
+	j = i;
+	min = tab->a[i--];
+	while (i >= 0)
+	{
+		if (tab->a[i] < min)
+		{
+			min = tab->a[i];
+			j = i;
+		}
+		i--;
+	}
+	return (j);
+}
+
 int		check_frames(s_pile *tab, int min_frame, int max_frame, int p)
 {
 	int i;
@@ -81,6 +162,15 @@ int		check_frames(s_pile *tab, int min_frame, int max_frame, int p)
 	{
 		max_frame = find_max_in_b(tab);
 		while (tab->b[i] != max_frame && i > 0)
+		{	
+			i--;
+			j++;
+		}
+	}
+	else if (tab->a[p] == min_frame)
+	{
+		min_frame = find_min_in_b(tab);
+		while (tab->b[i] != min_frame && i > 0)
 		{	
 			i--;
 			j++;

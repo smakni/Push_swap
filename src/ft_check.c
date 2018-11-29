@@ -5,6 +5,8 @@ int		check_pile_a(s_pile *tab)
 {
 	int i;
 
+	if (tab->la != tab->lt)
+		return (-1);
 	i = tab->la - 1;
 	while (i > 0)
 	{

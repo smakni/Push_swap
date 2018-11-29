@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 16:54:05 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 21:16:29 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	step_0(s_pile *tab)
 	ft_operations(tab, "pb");
 	ft_printf("pb\n");
 	ft_printf("pb\n");
-
 }
 
 void	place_a(s_pile *tab, s_sol *sol)
@@ -32,12 +31,12 @@ void	place_a(s_pile *tab, s_sol *sol)
 	tmp = ft_memalloc(sizeof(s_sol));
 	init_solution(tmp);
 	i = tab->la - 1;
-	save = first_a(tab, tmp, i--);
+	save = check_solutions(tab, tmp, i--);
 	save_solution(tmp, sol);
 	while (i >= 0)
 	{
-		if ((turns = first_a(tab, tmp, i)) < save)
-		{	
+		if ((turns = check_solutions(tab, tmp, i)) < save)
+		{
 			save = turns;
 			save_solution(tmp, sol);
 		}
@@ -51,10 +50,10 @@ static	void final_step(s_pile *tab)
 	int max;
 
 	i = tab->lb - 1;
-	max = check_max(tab);
+	max = find_max_in_b(tab);
 	while (tab->b[i] != max)
 		i--;
-	if (i > tab->lb / 2)
+	if (i > (tab->lb - 1) / 2)
 	{
 		i = tab->lb - 1;
 		while (tab->b[i] != max)
@@ -78,14 +77,103 @@ static	void final_step(s_pile *tab)
 		ft_printf("pa\n");
 	}
 }
+/*
+void	algo_1(s_pile *tab)
+{
+	if (tab->a[2] > tab->a[1] && tab->a[2] > tab->a[0])
+	{
+		ft_operations(tab, "ra");
+		ft_printf("ra\n");
+	}
+	if (tab->a[2] > tab->a[1])
+	{
+		ft_operations(tab, "sa");
+		ft_printf("sa\n");
+	}
+	if (check_pile_a(tab) == 0)
+		return ;
+	if (tab->a[2] < tab->a[0])
+	{
+		ft_operations(tab, "rra");
+		ft_printf("rra\n");
+		ft_operations(tab, "sa");
+		ft_printf("sa\n");
+	}
+	else
+	{		
+		ft_operations(tab, "rra");
+		ft_printf("rra\n");
+	}
+}*/
+
+void	algo_1(s_pile *tab)
+{
+	int i;
+
+	i = tab->la - 1;
+	if (tab->a[i] > tab->a[i - 1] && tab->a[i] > tab->a[i - 2])
+	{
+		ft_operations(tab, "ra");
+		ft_printf("ra\n");
+	}
+	if (tab->a[i] > tab->a[i - 1])
+	{
+		ft_operations(tab, "sa");
+		ft_printf("sa\n");
+	}
+	if (check_pile_a(tab) == 0)
+		return ;
+	if (tab->a[i] < tab->a[i - 2])
+	{
+		ft_operations(tab, "rra");
+		ft_printf("rra\n");
+		ft_operations(tab, "sa");
+		ft_printf("sa\n");
+	}
+	else
+	{		
+		ft_operations(tab, "rra");
+		ft_printf("rra\n");
+	}
+}
+
+void	algo_2(s_pile *tab, s_sol *sol)
+{
+	init_solution(sol);
+	cycle_a(tab, sol, find_i_min_in_a(tab));
+	exc_op(tab, sol);
+	if (tab->lt == 5)
+	{	
+		init_solution(sol);
+		cycle_a(tab, sol, find_i_min_in_a(tab));
+		exc_op(tab, sol);
+	}
+	algo_1(tab);
+	ft_operations(tab, "pa");
+	ft_printf("pa\n");
+	if (tab->lt == 5)
+	{
+		ft_operations(tab, "pa");
+		ft_printf("pa\n");
+	}
+}
+
+void	algo_3(s_pile *tab, s_sol *sol)
+{
+	step_0(tab);
+	while (tab->la > 0)
+	{
+		place_a(tab, sol);
+		exc_op(tab, sol);
+	}
+	final_step(tab);
+}
 
 int 	main(int ac, char **av)
 {
 	s_pile 	*tab;
 	s_sol 	*sol;
-	int		i;
 	
-	i = 0;
 	tab = ft_memalloc(sizeof(s_pile));
 	sol = ft_memalloc(sizeof(s_sol));
 	init_tab(ac, av, tab);
@@ -95,16 +183,14 @@ int 	main(int ac, char **av)
 		free_s_tab(tab);
 		return (0);
 	}
-	else
-	{
-		step_0(tab);
-		while (i < tab->la)
-		{
-			place_a(tab, sol);
-			exc_op(tab, sol);
-		}
-	}
-	final_step(tab);
+	algo_4(tab, sol);
+	return (0);
+	if (tab->lt <= 3)
+		algo_1(tab);
+	else if (tab->lt <= 5)
+		algo_2(tab, sol);
+	else if (tab->lt > 5)
+		algo_3(tab, sol);
 	free_s_tab(tab);
 	return (0);
 }
