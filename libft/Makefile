@@ -6,15 +6,15 @@
 #    By: smakni <smakni@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/20 20:30:37 by sabri             #+#    #+#              #
-#    Updated: 2018/11/21 13:39:13 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/30 16:57:26 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 	libftprintf.a
+NAME	= 	libft.a
 
 CC		=	gcc
 
-CFLAGS	+=	-Wall -Werror -Wextra -g3
+CFLAGS	+=	-Wall -Werror -Wextra 
 
 SRCS	=	./get_next_line/get_next_line.c \
 			./printf/ft_printf.c \
@@ -135,8 +135,6 @@ SRCS	=	./get_next_line/get_next_line.c \
 
 OBJS	=	$(SRCS:.c=.o)
 
-HEAD	=	-I ./libft/libft.h ft_printf.h ./get_next_line/get_next_line.h
-
 LM		=	@ar rc
 
 RM		=	@rm -f
@@ -145,8 +143,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 		$(LM) $(NAME) $(OBJS)
-		ranlib libftprintf.a
-		@echo "[BUILD SUCCESS]"
+		ranlib libft.a
+		@echo "[LIBFT OK]"
 
 clean:
 		$(RM) $(OBJS)
@@ -156,4 +154,4 @@ fclean:	clean
 
 re:	fclean all
 
-.PHONY : 	all
+.PHONY : all, clean, fclean, re

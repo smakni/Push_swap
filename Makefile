@@ -6,57 +6,105 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/30 13:37:48 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/30 17:03:54 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	push_swap
+NAME		=	push_swap
 
-NAME_C	=	checker
+NAME_C		=	checker
 
-CC		=	gcc
+CC			=	gcc
 
-CFLAGS	+=	-Wall -Werror -Wextra $(HEAD) 
+CFLAGS		+=	-Wall -Werror -Wextra
 
-SRC		=	./src/init_free.c \
-			./src/check_init.c \
-			./src/print_pile.c \
-			./src/ft_check.c \
-			./src/operations.c \
-			./src/check_op.c \
-			./src/frames.c \
-			./src/ft_atoi_p.c
+CPPFLAGS	=	-I include
+				
+SRC_PATH	=	src
 
-SRC_P	=	./src_p/push_swap.c \
+SRC_P_PATH	=	src_p
 
-SRC_C	=	./src_c/checker.c \
+SRC_C_PATH	=	src_c
 
-HEAD	=	-I ./include
+OBJ_PATH	=	obj
 
-OBJ		=	$(SRC:.c=.o)
+OBJ_P_PATH	=	obj_p
 
-OBJ_P	=	$(SRC_P:.c=.o)
+OBJ_C_PATH	=	obj_c
 
-OBJ_C	=	$(SRC_C:.c=.o)
+LDFLAGS		=	-L libft
 
-RM		=	rm -rf
+LDLIBS		=	-lft
+
+SRC_NAME	=	init_free.c \
+				check_init.c \
+				print_pile.c \
+				ft_check.c \
+				operations.c \
+				check_op.c \
+				frames.c \
+				ft_atoi_p.c
+
+SRC_P_NAME	=	push_swap.c 
+
+SRC_C_NAME	=	checker.c 
+
+OBJ_NAME	=	$(SRC_NAME:.c=.o)
+
+OBJ_P_NAME	=	$(SRC_P_NAME:.c=.o)
+
+OBJ_C_NAME	=	$(SRC_C_NAME:.c=.o)
+
+SRC 		= 	$(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
+SRC_P 		= 	$(addprefix $(SRC_P_PATH)/,$(SRC_P_NAME))
+
+SRC_C 		= 	$(addprefix $(SRC_C_PATH)/,$(SRC_C_NAME))
+
+OBJ 		= 	$(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+
+OBJ_P 		= 	$(addprefix $(OBJ_P_PATH)/,$(OBJ_P_NAME))
+
+OBJ_C 		= 	$(addprefix $(OBJ_C_PATH)/,$(OBJ_C_NAME))
 
 all: $(NAME)
 
-$(NAME): $(OBJ_C) $(OBJ_P) $(OBJ) libft
-		$(CC) -o $(NAME) $(OBJ) $(OBJ_P) ./libft/libftprintf.a
-		$(CC) -o $(NAME_C) $(OBJ) $(OBJ_C) ./libft/libftprintf.a
+$(NAME): LIB $(OBJ) $(OBJ_C) $(OBJ_P) 
+		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_P) -o $@
+		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_C) -o $(NAME_C)
 
-libft:
-		make -C libft
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+
+$(OBJ_P_PATH)/%.o: $(SRC_P_PATH)/%.c
+	@mkdir $(OBJ_P_PATH) 2> /dev/null || true
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+
+$(OBJ_C_PATH)/%.o: $(SRC_C_PATH)/%.c
+	@mkdir $(OBJ_C_PATH) 2> /dev/null || true
+	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+
+LIB:
+	make -C libft
+
 clean:
-		make clean -C libft
-		$(RM) $(OBJ) $(OBJ_P) $(OBJ_C)
+	rm -fv $(OBJ) $(OBJ_P) $(OBJ_C)
+	rmdir $(OBJ_PATH) 2> /dev/null || true
+	rmdir $(OBJ_P_PATH) 2> /dev/null || true
+	rmdir $(OBJ_C_PATH) 2> /dev/null || true	
+	make clean -C libft
 
 fclean: clean
-		make fclean -C libft
-		$(RM) $(NAME) $(NAME_C)
+	rm -fv $(NAME) $(NAME_C)
+	make fclean -C libft
 
 re:	fclean all
 
-.PHONY: all clean fclean re libft
+.PHONY: all, clean, fclean, re
+
+norme:
+	norminette $(SRC)
+	norminette $(SRC_P)
+	norminette $(SRC_C)
+	norminette ./include
