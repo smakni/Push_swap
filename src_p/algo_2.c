@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check.c                                         :+:      :+:    :+:   */
+/*   algo_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/30 17:27:21 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:20:31 by smakni           ###   ########.fr       */
+/*   Created: 2018/11/30 17:54:24 by smakni            #+#    #+#             */
+/*   Updated: 2018/11/30 18:22:41 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		check_pile_a(t_pile *tab)
+void	algo_2(t_pile *tab, t_sol *sol)
 {
-	int i;
-
-	if (tab->la != tab->lt)
-		return (-1);
-	i = tab->la - 1;
-	while (i > 0)
+	init_solution(sol);
+	cycle_a(tab, sol, find_i_min_in_a(tab));
+	exc_op(tab, sol);
+	if (tab->lt == 5)
 	{
-		if (tab->a[i] < tab->a[i - 1])
-			i--;
-		else
-			return (-1);
+		init_solution(sol);
+		cycle_a(tab, sol, find_i_min_in_a(tab));
+		exc_op(tab, sol);
 	}
-	return (0);
+	algo_1(tab);
+	ft_operations(tab, "pa");
+	ft_printf("pa\n");
+	if (tab->lt == 5)
+	{
+		ft_operations(tab, "pa");
+		ft_printf("pa\n");
+	}
 }

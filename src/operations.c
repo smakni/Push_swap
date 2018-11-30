@@ -6,13 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:42:44 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 00:59:01 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/30 18:21:32 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	ft_operations(s_pile *tab, char *line)
+void	ft_operations(t_pile *tab, char *line)
 {
 	if (ft_strequ("sa", line) == 1 || ft_strequ("sb", line) == 1
 			|| ft_strequ("ss", line) == 1)
@@ -20,14 +20,14 @@ void	ft_operations(s_pile *tab, char *line)
 	if (ft_strequ("pa", line) == 1 || ft_strequ("pb", line) == 1)
 		ft_push(tab, line);
 	if (ft_strequ("ra", line) == 1 || ft_strequ("rb", line) == 1
-	   		|| ft_strequ("rr", line) == 1)
+			|| ft_strequ("rr", line) == 1)
 		ft_rotate(tab, line);
 	if (ft_strequ("rra", line) == 1 || ft_strequ("rrb", line) == 1
-	   		|| ft_strequ("rrr", line) == 1)
+			|| ft_strequ("rrr", line) == 1)
 		ft_rotate_r(tab, line);
 }
 
-void	ft_swap(s_pile *tab, char *line)
+void	ft_swap(t_pile *tab, char *line)
 {
 	int tmp;
 
@@ -46,7 +46,7 @@ void	ft_swap(s_pile *tab, char *line)
 	}
 }
 
-void	ft_push(s_pile *tab, char *line)
+void	ft_push(t_pile *tab, char *line)
 {
 	if (tab->lb > 0 && line[1] == 'a')
 	{
@@ -64,7 +64,7 @@ void	ft_push(s_pile *tab, char *line)
 	}
 }
 
-void	ft_rotate(s_pile *tab, char *line)
+void	ft_rotate(t_pile *tab, char *line)
 {
 	int tmp;
 	int i;
@@ -93,7 +93,7 @@ void	ft_rotate(s_pile *tab, char *line)
 	}
 }
 
-void	ft_rotate_r(s_pile *tab, char *line)
+void	ft_rotate_r(t_pile *tab, char *line)
 {
 	int tmp;
 	int i;
@@ -101,7 +101,7 @@ void	ft_rotate_r(s_pile *tab, char *line)
 	if (tab->la > 0 && (line[2] == 'a' || line[2] == 'r'))
 	{
 		i = 0;
-		while (i < tab->la - 1)	
+		while (i < tab->la - 1)
 		{
 			tmp = tab->a[i + 1];
 			tab->a[i + 1] = tab->a[i];
@@ -112,7 +112,7 @@ void	ft_rotate_r(s_pile *tab, char *line)
 	if (tab->lb > 0 && (line[2] == 'b' || line[2] == 'r'))
 	{
 		i = 0;
-		while (i < tab->lb - 1)	
+		while (i < tab->lb - 1)
 		{
 			tmp = tab->b[i + 1];
 			tab->b[i + 1] = tab->b[i];

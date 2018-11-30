@@ -6,13 +6,13 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 11:48:53 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 18:25:02 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void	init_pile(s_pile *tab)
+static void	init_pile(t_pile *tab)
 {
 	tab->a = ft_memalloc(sizeof(long) * tab->lt);
 	tab->la = tab->lt;
@@ -20,7 +20,7 @@ static void	init_pile(s_pile *tab)
 	tab->lb = 0;
 }
 
-void		init_tab(int ac, char **av, s_pile *tab)
+void		init_tab(int ac, char **av, t_pile *tab)
 {
 	int len;
 	int i;
@@ -38,7 +38,7 @@ void		init_tab(int ac, char **av, s_pile *tab)
 		len = ac - 1;
 		tab->arg = ft_memalloc(sizeof(char *) * len);
 		while (i < len)
-		{	
+		{
 			tab->arg[i] = ft_strdup(av[i + 1]);
 			i++;
 		}
@@ -47,7 +47,7 @@ void		init_tab(int ac, char **av, s_pile *tab)
 	init_pile(tab);
 }
 
-void	free_s_tab(s_pile *tab)
+void		free_s_tab(t_pile *tab)
 {
 	int i;
 
@@ -60,7 +60,7 @@ void	free_s_tab(s_pile *tab)
 	free(tab);
 }
 
-void	init_solution(s_sol *sol)
+void		init_solution(t_sol *sol)
 {
 	sol->sa = 0;
 	sol->sb = 0;

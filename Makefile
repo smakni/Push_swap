@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/30 17:03:54 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/30 18:32:55 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ LDFLAGS		=	-L libft
 LDLIBS		=	-lft
 
 SRC_NAME	=	init_free.c \
+				op_executer.c \
 				check_init.c \
 				print_pile.c \
 				ft_check.c \
@@ -45,7 +46,10 @@ SRC_NAME	=	init_free.c \
 				frames.c \
 				ft_atoi_p.c
 
-SRC_P_NAME	=	push_swap.c 
+SRC_P_NAME	=	push_swap.c \
+				algo_1.c \
+				algo_2.c \
+				algo_3.c
 
 SRC_C_NAME	=	checker.c 
 
@@ -69,7 +73,7 @@ OBJ_C 		= 	$(addprefix $(OBJ_C_PATH)/,$(OBJ_C_NAME))
 
 all: $(NAME)
 
-$(NAME): LIB $(OBJ) $(OBJ_C) $(OBJ_P) 
+$(NAME): $(OBJ) $(OBJ_C) $(OBJ_P) LIB
 		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_P) -o $@
 		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_C) -o $(NAME_C)
 
