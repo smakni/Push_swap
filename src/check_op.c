@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 23:29:03 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/30 14:55:49 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static void	cycle_b(s_pile *tab, s_sol *sol, int j)
 	int i;
 
 	i = 0;
-	if (j < tab->lb)
+	if (j >= tab->lb / 2)
 	{	
-		while (j-- > 0)
+		while (j++ < tab->lb - 1)
 			i++;
 		sol->rb = i;
 	}
 	else
 	{	
-		while (j-- > 0)
+		while (j-- >= 0)
 			i++;
 		sol->rrb = i;
 	}
@@ -91,6 +91,7 @@ int		check_solutions(s_pile *tab, s_sol *tmp, int p)
 	j = check_frames(tab, min_frame, max_frame, p);	
 	cycle_a(tab, tmp, p);
 	cycle_b(tab, tmp, j);
+	//ft_printf("tab->a[p] = %d |", tab->a[p]);
 	return (analyse_solution(tmp));
 }
 

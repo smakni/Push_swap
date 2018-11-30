@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 23:51:38 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/30 15:00:06 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,41 +105,7 @@ void	algo_1(s_pile *tab)
 		ft_printf("rra\n");
 	}
 }
-/*
-void	algo_1(s_pile *tab)
-{
-	int i;
 
-	i = tab->la - 1;
-	if (tab->a[i] > tab->a[i - 1] && tab->a[i] > tab->a[i - 2])
-	{
-		ft_operations(tab, "ra");
-		ft_printf("ra\n");
-	}
-	if (tab->a[i] > tab->a[i - 1])
-	{
-		ft_operations(tab, "sa");
-		ft_printf("sa\n");
-	}
-	if (check_pile_a(tab) == 0)
-		return ;
-	if (tab->a[i] < tab->a[i - 2])
-	{
-		ft_operations(tab, "rra");
-		ft_printf("rra\n");
-		if (tab->a[i] < tab->a[i - 1])
-		{
-			ft_operations(tab, "sa");
-			ft_printf("sa\n");
-		}
-	}
-	else
-	{		
-		ft_operations(tab, "rra");
-		ft_printf("rra\n");
-	}
-}
-*/
 void	algo_2(s_pile *tab, s_sol *sol)
 {
 	init_solution(sol);
@@ -186,8 +152,6 @@ int 	main(int ac, char **av)
 		free_s_tab(tab);
 		return (0);
 	}
-	//algo_4(tab, sol);
-	//return (0);
 	if (tab->lt <= 3)
 		algo_1(tab);
 	else if (tab->lt <= 5)

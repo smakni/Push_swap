@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 14:15:15 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 21:11:20 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 15:00:03 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,6 @@ int		find_max_in_b(s_pile *tab)
 		i--;
 	}
 	return (max);
-}
-
-static	int		find_min_in_b(s_pile *tab)
-{
-	int i;
-	int min;
-
-	i = tab->lb - 1;
-	min = tab->b[i--];
-	while (i >= 0)
-	{
-		if (tab->b[i] < min)
-			min = tab->b[i];
-		i--;
-	}
-	return (min);
 }
 
 int		find_i_max_in_a(s_pile *tab)
@@ -162,27 +146,10 @@ int		check_frames(s_pile *tab, int min_frame, int max_frame, int p)
 	{
 		max_frame = find_max_in_b(tab);
 		while (tab->b[i] != max_frame && i > 0)
-		{	
 			i--;
-			j++;
-		}
-	}
-	else if (tab->a[p] == min_frame)
-	{
-		min_frame = find_min_in_b(tab);
-		while (tab->b[i] != min_frame && i > 0)
-		{	
-			i--;
-			j++;
-		}
 	}
 	else
-	{
 		while (tab->b[i] != min_frame && i > 0)
-		{	
 			i--;
-			j++;
-		}
-	}
-	return (j);
+	return (i);
 }
