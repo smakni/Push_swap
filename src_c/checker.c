@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:32:56 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 23:14:38 by marvin           ###   ########.fr       */
+/*   Updated: 2018/11/30 17:02:43 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		main(int ac, char **av)
 		ft_strdel(&line);
 	}
 	if (check_pile_a(tab) == -1)
-		ft_printf("KO\n");
+		ft_printf("\nKO\n");
 	else
-		ft_printf("OK\n");
+		ft_printf("\nOK\n");
 	free_s_tab(tab);
 	return (0);
 }
