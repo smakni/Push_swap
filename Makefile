@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/30 18:32:55 by smakni           ###   ########.fr        #
+#    Updated: 2018/11/30 19:03:13 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,8 @@ OBJ_C 		= 	$(addprefix $(OBJ_C_PATH)/,$(OBJ_C_NAME))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(OBJ_C) $(OBJ_P) LIB
+$(NAME): $(OBJ) $(OBJ_C) $(OBJ_P)
+		make -C libft
 		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_P) -o $@
 		$(CC) $(LDFLAGS) $(LDLIBS) $(OBJ) $(OBJ_C) -o $(NAME_C)
 
@@ -88,9 +89,6 @@ $(OBJ_P_PATH)/%.o: $(SRC_P_PATH)/%.c
 $(OBJ_C_PATH)/%.o: $(SRC_C_PATH)/%.c
 	@mkdir $(OBJ_C_PATH) 2> /dev/null || true
 	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
-
-LIB:
-	make -C libft
 
 clean:
 	rm -fv $(OBJ) $(OBJ_P) $(OBJ_C)
