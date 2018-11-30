@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 21:16:29 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 23:51:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static	void final_step(s_pile *tab)
 		ft_printf("pa\n");
 	}
 }
-/*
+
 void	algo_1(s_pile *tab)
 {
 	if (tab->a[2] > tab->a[1] && tab->a[2] > tab->a[0])
@@ -90,7 +90,7 @@ void	algo_1(s_pile *tab)
 		ft_operations(tab, "sa");
 		ft_printf("sa\n");
 	}
-	if (check_pile_a(tab) == 0)
+	if (check_pile_a(tab) == 0 || (tab->a[2] < tab->a[1] && tab->a[1] < tab->a[0]))
 		return ;
 	if (tab->a[2] < tab->a[0])
 	{
@@ -104,8 +104,8 @@ void	algo_1(s_pile *tab)
 		ft_operations(tab, "rra");
 		ft_printf("rra\n");
 	}
-}*/
-
+}
+/*
 void	algo_1(s_pile *tab)
 {
 	int i;
@@ -127,8 +127,11 @@ void	algo_1(s_pile *tab)
 	{
 		ft_operations(tab, "rra");
 		ft_printf("rra\n");
-		ft_operations(tab, "sa");
-		ft_printf("sa\n");
+		if (tab->a[i] < tab->a[i - 1])
+		{
+			ft_operations(tab, "sa");
+			ft_printf("sa\n");
+		}
 	}
 	else
 	{		
@@ -136,7 +139,7 @@ void	algo_1(s_pile *tab)
 		ft_printf("rra\n");
 	}
 }
-
+*/
 void	algo_2(s_pile *tab, s_sol *sol)
 {
 	init_solution(sol);
@@ -183,8 +186,8 @@ int 	main(int ac, char **av)
 		free_s_tab(tab);
 		return (0);
 	}
-	algo_4(tab, sol);
-	return (0);
+	//algo_4(tab, sol);
+	//return (0);
 	if (tab->lt <= 3)
 		algo_1(tab);
 	else if (tab->lt <= 5)
@@ -192,6 +195,7 @@ int 	main(int ac, char **av)
 	else if (tab->lt > 5)
 		algo_3(tab, sol);
 	free_s_tab(tab);
+	free(sol);
 	return (0);
 }
 

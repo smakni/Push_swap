@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:32:56 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 16:51:14 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 23:14:38 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		main(int ac, char **av)
 		ft_strdel(&line);
 	}
 	if (check_pile_a(tab) == -1)
-		ft_printf("KO");
+		ft_printf("KO\n");
 	else
-		ft_printf("OK");
+		ft_printf("OK\n");
 	free_s_tab(tab);
 	return (0);
 }

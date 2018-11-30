@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 21:16:26 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/29 23:29:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,6 @@ void	exc_op(s_pile *tab, s_sol *sol)
 		ft_operations(tab, "rrr");
 		ft_printf("rrr\n");
 	}
-	//ft_operations(tab, "pb");
-	//ft_printf("pb\n");
+	ft_operations(tab, "pb");
+	ft_printf("pb\n");
 }
