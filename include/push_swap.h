@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 20:39:36 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 12:28:59 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 typedef struct t_pile
 {
 	char	**arg;
-	int 	*a;
-	int		*b;
+	long 	*a;
+	long	*b;
 	int		lt;
 	int		la;
 	int		lb;
@@ -72,6 +72,6 @@ void		save_solution(s_sol *tmp, s_sol *sol);
 void		init_solution(s_sol *sol);
 int			check_solutions(s_pile *tab, s_sol *tmp, int p);
 void		cycle_a(s_pile *tab, s_sol *sol, int p);
-void		algo_4(s_pile *tab, s_sol *sol);
+long		ft_atoi_p(const char *str);
 
 #endif

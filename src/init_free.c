@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/28 18:05:59 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 11:48:53 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	init_pile(s_pile *tab)
 {
-	tab->a = ft_memalloc(sizeof(int) * tab->lt);
+	tab->a = ft_memalloc(sizeof(long) * tab->lt);
 	tab->la = tab->lt;
-	tab->b = ft_memalloc(sizeof(int) * tab->lt);
+	tab->b = ft_memalloc(sizeof(long) * tab->lt);
 	tab->lb = 0;
 }
 

@@ -6,22 +6,13 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 12:40:46 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 12:27:46 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 12:29:53 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <push_swap.h>
 
-static long			ft_checkover(unsigned long x, int s)
-{
-	if (x > LONG_MAX && s == 1)
-		return (-1);
-	if (x > LONG_MAX && s == -1)
-		return (0);
-	return (x * s);
-}
-
-long				ft_atoi(const char *str)
+long	ft_atoi_p(const char *str)
 {
 	int		i;
 	size_t	x;
@@ -44,5 +35,6 @@ long				ft_atoi(const char *str)
 		x = (x * 10) + str[i] - '0';
 		i++;
 	}
-	return (ft_checkover(x, s));
+	x *= s;
+	return (x);
 }

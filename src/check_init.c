@@ -6,11 +6,12 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:49:45 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/23 15:58:49 by smakni           ###   ########.fr       */
+/*   Updated: 2018/11/30 12:29:13 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <push_swap.h>
+#include <push_swap.h>
+#include <limits.h>
 
 static	int	check_nb(char *str)
 {
@@ -23,7 +24,7 @@ static	int	check_nb(char *str)
 		   i++;	
 		if (ft_isdigit(str[i]) != 1)
 		{
-			ft_printf("error");
+			ft_printf("error\n");
 			exit(-1);
 		}
 		i++;
@@ -31,7 +32,7 @@ static	int	check_nb(char *str)
 	return (0);
 }
 
-static	int	check_dlb(int *a, int cur, int i)
+static	int	check_dlb(long *a, int cur, int i)
 {
 	int j;
 
@@ -40,7 +41,7 @@ static	int	check_dlb(int *a, int cur, int i)
 	{
 		if (cur == a[j])
 		{	
-			ft_printf("error");
+			ft_printf("error\n");
 			exit(-1);
 		}
 		j++;
@@ -58,7 +59,12 @@ void		check_init(s_pile *tab)
 	while (i >= 0)
 	{
 		check_nb(tab->arg[i]);
-		tab->a[j] = ft_atoi(tab->arg[i]);
+		tab->a[j] = ft_atoi_p(tab->arg[i]);
+		if (tab->a[j] > INT_MAX || tab->a[j] < INT_MIN)
+		{
+			ft_printf("error\n");
+			exit(-1);
+		}
 		check_dlb(tab->a, tab->a[j], j);
 		i--;
 		j++;
