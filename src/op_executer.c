@@ -12,23 +12,8 @@
 
 #include <push_swap.h>
 
-void	exc_op(t_pile *tab, t_sol *sol)
+static	void	smart_rotate(t_pile *tab, t_sol *sol)
 {
-	while (sol->sa-- > 0)
-	{
-		ft_operations(tab, "sa");
-		ft_printf("sa\n");
-	}
-	while (sol->sb-- > 0)
-	{
-		ft_operations(tab, "sb");
-		ft_printf("sb\n");
-	}
-	while (sol->ss-- > 0)
-	{
-		ft_operations(tab, "ss");
-		ft_printf("sa\n");
-	}
 	while (sol->ra-- > 0)
 	{
 		ft_operations(tab, "ra");
@@ -44,6 +29,10 @@ void	exc_op(t_pile *tab, t_sol *sol)
 		ft_operations(tab, "rr");
 		ft_printf("rr\n");
 	}
+}
+
+static	void	smart_reverse_rotate(t_pile *tab, t_sol *sol)
+{
 	while (sol->rra-- > 0)
 	{
 		ft_operations(tab, "rra");
@@ -59,6 +48,12 @@ void	exc_op(t_pile *tab, t_sol *sol)
 		ft_operations(tab, "rrr");
 		ft_printf("rrr\n");
 	}
+}
+
+void			exc_op(t_pile *tab, t_sol *sol)
+{
+	smart_rotate(tab, sol);
+	smart_reverse_rotate(tab, sol);
 	ft_operations(tab, "pb");
 	ft_printf("pb\n");
 }
