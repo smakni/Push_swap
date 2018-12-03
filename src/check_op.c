@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 16:45:57 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:25:26 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 16:02:07 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,7 @@ static void	cycle_b(t_pile *tab, t_sol *sol, int j)
 
 static int	analyse_solution(t_sol *tmp)
 {
-	t_sol *tmp2;
-
-	tmp2 = ft_memalloc(sizeof(t_sol));
-	save_solution(tmp, tmp2);
-	if (tmp2->rb > 0 && tmp2->ra > 0)
+	if (tmp->rb > 0 && tmp->ra > 0)
 	{
 		while (tmp->rb > 0 && tmp->ra > 0)
 		{
@@ -67,7 +63,7 @@ static int	analyse_solution(t_sol *tmp)
 			tmp->rb--;
 		}
 	}
-	if (tmp2->rrb > 0 && tmp2->rra > 0)
+	if (tmp->rrb > 0 && tmp->rra > 0)
 	{
 		while (tmp->rrb > 0 && tmp->rra > 0)
 		{
