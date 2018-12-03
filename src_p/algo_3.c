@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:02:29 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:23:09 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 16:01:47 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void			place_a(t_pile *tab, t_sol *sol)
 		}
 		i--;
 	}
+	free(tmp);
 }
 
 static	void	reorganize_b(t_pile *tab, int max, int i)
