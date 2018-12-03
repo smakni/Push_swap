@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 16:12:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:33:49 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 13:49:18 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ struct		s_sol
 typedef	struct s_sol	t_sol;
 
 int			ft_printf(const char *format, ...);
-void		ft_operations(t_pile *tab, char *line);
+int			ft_operations(t_pile *tab, char *line);
 void		ft_swap(t_pile *tab, char *line);
 void		ft_push(t_pile *tab, char *line);
 void		ft_rotate(t_pile *tab, char *line);
@@ -57,7 +57,7 @@ void		ft_rotate_r_ret(t_pile *tab, char *line);
 int			*ft_tabdup(int *tab, int len);
 void		init_tab(int ac, char **av, t_pile *tab);
 void		free_s_tab(t_pile *tab);
-void		print_pile(t_pile *tab);
+void		print_stack(t_pile *tab, char *opt, char *line);
 void		check_init(t_pile *tab);
 int			check_pile_a(t_pile *tab);
 void		in_place_b(t_pile *tab, t_sol *sol, int p);

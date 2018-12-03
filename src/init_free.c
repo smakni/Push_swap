@@ -6,13 +6,13 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:25:02 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 14:21:34 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void	init_pile(t_pile *tab)
+static	void	init_pile(t_pile *tab)
 {
 	tab->a = ft_memalloc(sizeof(long) * tab->lt);
 	tab->la = tab->lt;
@@ -20,13 +20,24 @@ static void	init_pile(t_pile *tab)
 	tab->lb = 0;
 }
 
-void		init_tab(int ac, char **av, t_pile *tab)
+static	int		check_visu(int ac, char **av)
+{
+	if (ft_strequ("-v", av[ac - 1]) == 1
+		|| ft_strequ("-v1", av[ac - 1]) == 1
+		|| ft_strequ("-v2", av[ac - 1]) == 1
+		|| ft_strequ("-v3", av[ac - 1]) == 1)
+		ac--;
+	return (ac);
+}
+
+void			init_tab(int ac, char **av, t_pile *tab)
 {
 	int len;
 	int i;
 
 	len = 0;
 	i = 0;
+	ac = check_visu(ac, av);
 	if (ac == 2)
 	{
 		tab->arg = ft_strsplit(av[1], ' ');
@@ -47,7 +58,7 @@ void		init_tab(int ac, char **av, t_pile *tab)
 	init_pile(tab);
 }
 
-void		free_s_tab(t_pile *tab)
+void			free_s_tab(t_pile *tab)
 {
 	int i;
 
@@ -60,7 +71,7 @@ void		free_s_tab(t_pile *tab)
 	free(tab);
 }
 
-void		init_solution(t_sol *sol)
+void			init_solution(t_sol *sol)
 {
 	sol->sa = 0;
 	sol->sb = 0;
