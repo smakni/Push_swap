@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 17:44:53 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:22:25 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:56:00 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	algo_1(t_pile *tab)
 {
-	if (tab->a[2] > tab->a[1] && tab->a[2] > tab->a[0])
+	if (tab->lt >= 3 && tab->a[2] > tab->a[1] && tab->a[2] > tab->a[0])
 	{
 		ft_operations(tab, "ra");
 		ft_printf("ra\n");
 	}
-	if (tab->a[2] > tab->a[1])
+	if (tab->lt >= 3 && tab->a[2] > tab->a[1])
 	{
 		ft_operations(tab, "sa");
 		ft_printf("sa\n");
 	}
-	if (tab->a[2] < tab->a[1] && tab->a[1] < tab->a[0])
+	if (tab->lt >= 3 && tab->a[2] < tab->a[1] && tab->a[1] < tab->a[0])
 		return ;
-	if (tab->a[2] < tab->a[0])
+	if (tab->lt >= 3 && tab->a[2] < tab->a[0])
 	{
 		ft_operations(tab, "rra");
 		ft_printf("rra\n");
