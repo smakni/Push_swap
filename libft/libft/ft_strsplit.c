@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:24:47 by smakni            #+#    #+#             */
-/*   Updated: 2018/05/03 14:35:04 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 16:30:26 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char			**ft_strsplit(char const *s, char c)
 		return (NULL);
 	i = 0;
 	j = 0;
-	if ((tab = malloc(sizeof(char*) * (nb_w(s, c)) + 1)) == NULL)
+	if ((tab = malloc(sizeof(char*) * (nb_w(s, c) + 1))) == NULL)
 		return (NULL);
 	while (s[i])
 	{
