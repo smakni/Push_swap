@@ -6,25 +6,31 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:42:44 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:21:32 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 14:26:33 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	ft_operations(t_pile *tab, char *line)
+int		ft_operations(t_pile *tab, char *line)
 {
 	if (ft_strequ("sa", line) == 1 || ft_strequ("sb", line) == 1
 			|| ft_strequ("ss", line) == 1)
 		ft_swap(tab, line);
-	if (ft_strequ("pa", line) == 1 || ft_strequ("pb", line) == 1)
+	else if (ft_strequ("pa", line) == 1 || ft_strequ("pb", line) == 1)
 		ft_push(tab, line);
-	if (ft_strequ("ra", line) == 1 || ft_strequ("rb", line) == 1
+	else if (ft_strequ("ra", line) == 1 || ft_strequ("rb", line) == 1
 			|| ft_strequ("rr", line) == 1)
 		ft_rotate(tab, line);
-	if (ft_strequ("rra", line) == 1 || ft_strequ("rrb", line) == 1
+	else if (ft_strequ("rra", line) == 1 || ft_strequ("rrb", line) == 1
 			|| ft_strequ("rrr", line) == 1)
 		ft_rotate_r(tab, line);
+	else
+	{
+		ft_printf("error");
+		exit(-1);
+	}
+	return (0);
 }
 
 void	ft_swap(t_pile *tab, char *line)

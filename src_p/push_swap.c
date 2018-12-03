@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:23:33 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 12:28:15 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		main(int ac, char **av)
 	t_pile	*tab;
 	t_sol	*sol;
 
+	if (ac == 1)
+		return (0);
 	tab = ft_memalloc(sizeof(t_pile));
 	sol = ft_memalloc(sizeof(t_sol));
 	init_tab(ac, av, tab);
