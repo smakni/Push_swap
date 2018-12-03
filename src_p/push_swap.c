@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 18:12:54 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 12:28:15 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:36:54 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		main(int ac, char **av)
 	check_init(tab);
 	if (check_pile_a(tab) == 0)
 	{
+		free(sol);
 		free_s_tab(tab);
 		return (0);
 	}
