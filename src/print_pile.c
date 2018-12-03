@@ -20,8 +20,6 @@ static	void	print_speed(char *opt)
 		usleep(100000);
 	else if (opt[2] == '1')
 		usleep(300000);
-	else
-		usleep(500000);
 }
 
 static	void	print_stack_2(t_pile *tab)
@@ -53,7 +51,7 @@ void			print_stack(t_pile *tab, char *opt, char *line)
 		print_stack_2(tab);
 		ft_printf("|---------------------|\n");
 		ft_printf("|stack_a       stack_b|\n");
-		ft_printf("|>>>>>>>>[%5d]<<<<<<|\n", count++);
+		ft_printf("|>>>>>>>[%5d]<<<<<<<|\n", count++);
 		ft_printf("|---------------------|\n");
 		ft_printf("OP = %s\n", line);
 		print_speed(opt);
