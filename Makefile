@@ -6,7 +6,7 @@
 #    By: smakni <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 13:20:28 by smakni            #+#    #+#              #
-#    Updated: 2018/11/30 19:03:13 by smakni           ###   ########.fr        #
+#    Updated: 2018/12/03 12:19:27 by smakni           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,9 @@ fclean: clean
 	rm -fv $(NAME) $(NAME_C)
 	make fclean -C libft
 
-re:	fclean all
+re:
+	make fclean
+	make
 
 .PHONY: all, clean, fclean, re
 
