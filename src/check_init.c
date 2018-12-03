@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:49:45 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/30 18:19:41 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:32:57 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static	int	check_nb(char *str)
 			i++;
 		if (ft_isdigit(str[i]) != 1)
 		{
-			ft_printf("error\n");
+			ft_printf("Error\n");
 			exit(-1);
 		}
 		i++;
@@ -41,7 +41,7 @@ static	int	check_dlb(long *a, int cur, int i)
 	{
 		if (cur == a[j])
 		{
-			ft_printf("error\n");
+			ft_printf("Error\n");
 			exit(-1);
 		}
 		j++;
@@ -62,7 +62,7 @@ void		check_init(t_pile *tab)
 		tab->a[j] = ft_atoi_p(tab->arg[i]);
 		if (tab->a[j] > INT_MAX || tab->a[j] < INT_MIN)
 		{
-			ft_printf("error\n");
+			ft_printf("Error\n");
 			exit(-1);
 		}
 		check_dlb(tab->a, tab->a[j], j);
