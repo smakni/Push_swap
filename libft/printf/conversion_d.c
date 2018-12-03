@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/25 23:12:30 by sabri             #+#    #+#             */
-/*   Updated: 2018/11/17 15:26:26 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 16:28:00 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,13 @@ static	void	final(t_format *arg, char *tmp, char *nb, int len_nb)
 	ft_strdel(&nb);
 }
 
+static	char	*empty_conv(char *nb)
+{
+	ft_strdel(&nb);
+	nb = ft_strdup("");
+	return (nb);
+}
+
 void			conversion_d(t_format *arg, va_list av)
 {
 	int		len_nb;
@@ -94,7 +101,7 @@ void			conversion_d(t_format *arg, va_list av)
 	check = conversion_null(arg, nb);
 	if (check == 0 && ft_strcmp(nb, "0") == 0 && arg->precision == 0
 			&& ft_strchr(arg->str, '.') != 0)
-		nb = ft_strdup("");
+		nb = empty_conv(nb);
 	if (arg->precision >= (len_nb = ft_strlen(nb)))
 		nb = conversion_d2(arg, nb);
 	if (ft_strcmp(nb, "") != 0 && ft_strchr(arg->option, '#') != 0)
