@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:51:48 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 15:11:19 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:14:43 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 static	void	print_speed(char *opt)
 {
-	if (opt[2] == '1')
-		sleep(1);
-	if (opt[2] == '2')
-		sleep(2);
 	if (opt[2] == '3')
-		sleep(3);
+		usleep(10000);
+	else if (opt[2] == '2')
+		usleep(100000);
+	else if (opt[2] == '1')
+		usleep(300000);
+	else
+		usleep(500000);
 }
 
 static	void	print_stack_2(t_pile *tab)
