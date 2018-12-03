@@ -6,7 +6,7 @@
 /*   By: smakni <smakni@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:51:48 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 14:31:19 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 15:11:19 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void			print_stack(t_pile *tab, char *opt, char *line)
 		ft_printf("\n|---------------------|\n");
 		print_stack_2(tab);
 		ft_printf("|---------------------|\n");
-		ft_printf("|stack_a       satck_b|\n");
+		ft_printf("|stack_a       stack_b|\n");
 		ft_printf("|>>>>>>>>[%5d]<<<<<<|\n", count++);
 		ft_printf("|---------------------|\n");
 		ft_printf("OP = %s\n", line);
