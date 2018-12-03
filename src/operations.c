@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/21 17:42:44 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 14:26:33 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/03 17:33:14 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		ft_operations(t_pile *tab, char *line)
 		ft_rotate_r(tab, line);
 	else
 	{
-		ft_printf("error");
+		ft_printf("Error");
 		exit(-1);
 	}
 	return (0);
