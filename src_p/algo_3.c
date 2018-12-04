@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 18:02:29 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 16:01:47 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:06:04 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void			place_a(t_pile *tab, t_sol *sol)
 	int		turns;
 	t_sol	*tmp;
 
-	tmp = ft_memalloc(sizeof(t_sol));
+	if (!(tmp = ft_memalloc(sizeof(t_sol))))
+		exit(-1);
 	init_solution(tmp);
 	i = tab->la - 1;
 	save = check_solutions(tab, tmp, i--);

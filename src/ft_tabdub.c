@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 13:58:16 by smakni            #+#    #+#             */
-/*   Updated: 2018/11/29 00:45:46 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/04 14:59:49 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		*ft_tabdup(int *tab, int len)
 	int *tmp;
 
 	i = 0;
-	tmp = ft_memalloc(sizeof(int) * len);
+	if ((!tmp = ft_memalloc(sizeof(int) * len)))
+		return (0);
 	while (i < len)
 	{
 		tmp[i] = tab[i];

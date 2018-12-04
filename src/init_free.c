@@ -6,7 +6,7 @@
 /*   By: smakni <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:53:33 by smakni            #+#    #+#             */
-/*   Updated: 2018/12/03 14:21:34 by smakni           ###   ########.fr       */
+/*   Updated: 2018/12/04 15:01:07 by smakni           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 static	void	init_pile(t_pile *tab)
 {
-	tab->a = ft_memalloc(sizeof(long) * tab->lt);
+	if (!(tab->a = ft_memalloc(sizeof(long) * tab->lt)))
+		exit(-1);
 	tab->la = tab->lt;
-	tab->b = ft_memalloc(sizeof(long) * tab->lt);
+	if (!(tab->b = ft_memalloc(sizeof(long) * tab->lt)))
+		exit(-1);
 	tab->lb = 0;
 }
 
@@ -47,7 +49,8 @@ void			init_tab(int ac, char **av, t_pile *tab)
 	else
 	{
 		len = ac - 1;
-		tab->arg = ft_memalloc(sizeof(char *) * len);
+		if (!(tab->arg = ft_memalloc(sizeof(char *) * len)))
+			exit(-1);
 		while (i < len)
 		{
 			tab->arg[i] = ft_strdup(av[i + 1]);
